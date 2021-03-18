@@ -4,45 +4,51 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     email: {
-        required: [true, 'Email field is required'],
-        type: mongoose.Types.String,
+        type: String,
+        trim: true,
+        unique: 'Email already exists',
+        match: [/.+\@.+\..+/, 'Please fill a valid email address'],
+        required: 'Email field is required',
     },
     firstName: {
-        required: [true, 'First Name field is required'],
-        type: mongoose.Types.String,
+        type: String,
+        trim: true,
+        required: 'Name field is required',
     },
     lastName: {
-        required: [true, 'Last Name field is required'],
-        type: mongoose.Types.String,
+        type: String,
+        required: 'Last Name field is required',
     },
     password: {
-        required: [true, 'Password field is required'],
-        type: mongoose.Types.String,
+        type: String,
+        required: 'Password field is required',
     },
     gender: {
         required: false,
-        type: mongoose.Types.String,
+        type: String,
         default: 'Unspecified',
     },
     age: {
         required: false,
+        type: Number,
+    },
+    joined: {
         type: Date,
+        default: Date.now,
     },
     menus: [
         {
             type: mongoose.Types.ObjectId,
-            required: false,
-            ref: 'Painting',
+            ref: 'Menu',
         },
     ],
     weights: [
         {
             type: mongoose.Types.ObjectId,
-            required: false,
-            ref: 'Post',
+            ref: 'Weight',
         },
     ],
-    resetToken: mongoose.Types.String,
+    resetToken: String,
     resetTokenExpiration: Date,
 });
 
