@@ -6,7 +6,9 @@ const StyledButton = () => {
     return (
         <div style={{ width: 'fit-content' }}>
             <StyledButtonContainer>
-                <Link to='Info' spy={true} smooth={true}>SHOW ME MORE</Link>
+                <Link to='Features' spy={true} smooth={true}>
+                    SHOW ME MORE
+                </Link>
             </StyledButtonContainer>
             <Chevron />
         </div>

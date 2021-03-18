@@ -8,8 +8,8 @@ const Home = () => {
     return (
         <Fragment>
             <Hero />
-            <InfoSection />
             <Features />
+            <InfoSection />
         </Fragment>
     );
 };
