@@ -12,6 +12,8 @@ import {
     IllnessIcon,
     InjuryIcon,
     IconDiv,
+    InfoSectionReasonsWrapper,
+    InfoSectionTextWrapper,
 } from './Reasons.styles';
 
 const InfoSectionReasons = () => {
@@ -57,12 +59,16 @@ const InfoSectionReasons = () => {
     return (
         <ReasonsDiv>
             <InfoSectionTitle>Why It Matters</InfoSectionTitle>
-            <InfoSectionDesc>
-                Most people know good nutrition and physical activity can help
-                maintain a healthy weight. But the benefits of good nutrition go
-                beyond weight. Good nutrition can help
-            </InfoSectionDesc>
-            <ReasonsContainer>{reasonsElements}</ReasonsContainer>
+            <InfoSectionReasonsWrapper>
+                <InfoSectionTextWrapper>
+                    <InfoSectionDesc>
+                        Most people know good nutrition and physical activity
+                        can help maintain a healthy weight. But the benefits of
+                        good nutrition go beyond weight.
+                    </InfoSectionDesc>
+                </InfoSectionTextWrapper>
+                <ReasonsContainer>{reasonsElements}</ReasonsContainer>
+            </InfoSectionReasonsWrapper>
         </ReasonsDiv>
     );
 };
