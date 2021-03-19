@@ -13,7 +13,7 @@ function App() {
             <Navbar />
             <Switch>
                 <Route path='/' exact>
-                    <Suspense fallback={Spinner}>
+                    <Suspense fallback={<Spinner />}>
                         <Home />
                     </Suspense>
                 </Route>

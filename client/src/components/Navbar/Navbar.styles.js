@@ -10,6 +10,7 @@ const backgroundStyle = (props) => {
 
 export const transparentCss = css`
     background-color: transparent;
+    transition: all 0.5s linear;
 `;
 
 export const coloredCss = css`
