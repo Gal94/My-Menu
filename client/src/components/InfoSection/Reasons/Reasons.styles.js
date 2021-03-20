@@ -7,6 +7,7 @@ import { ReactComponent as Illness } from './illness.svg';
 import { ReactComponent as Injury } from './injury.svg';
 
 export const ReasonsDiv = Styled.div`
+    color: #f0f0f0;
 `;
 
 export const InfoSectionTitle = Styled.h1`
@@ -54,8 +55,8 @@ export const ReasonsContainer = Styled.div`
 export const Reason = Styled.div`
     width: 31%;
     border: 1px solid #f0f0f0;
-    border-radius: .2rem;
-    background-color: #d6cd4f;
+    border-radius: .4rem;
+    background-color: #A62F02;
     margin-top: 1rem;
     height: 8rem;
     display: flex;
@@ -66,10 +67,6 @@ export const Reason = Styled.div`
     @media screen and (min-width: 1280px) {
         &:hover {
             transform: scale(1.1,1.1);
-
-            svg {
-                filter: invert(36%) sepia(67%) saturate(5516%) hue-rotate(346deg) brightness(90%) contrast(102%);
-            }
         }
      }
 `;
@@ -84,6 +81,7 @@ export const ReasonText = Styled.p`
 
     @media screen and (min-width: 1280px) {
         font-size: 18px;
+        cursor: default;
     }
 `;
 
@@ -94,6 +92,8 @@ export const IconDiv = Styled.div`
 const IconCss = css`
     height: 50px;
     width: auto;
+    filter: invert(100%) sepia(2%) saturate(6968%) hue-rotate(192deg)
+        brightness(122%) contrast(88%);
 `;
 
 export const DiseaseIcon = Styled(Disease)`
@@ -102,17 +102,15 @@ export const DiseaseIcon = Styled(Disease)`
 
 export const BloodPressureIcon = Styled(BloodPressure)`
     ${IconCss};
-    // filter: invert(79%) sepia(16%) saturate(1182%) hue-rotate(63deg) brightness(95%) contrast(90%);
 `;
 
 export const CholesterolIcon = Styled(Cholesterol)`
     ${IconCss};
-    //filter: invert(79%) sepia(16%) saturate(1182%) hue-rotate(63deg) brightness(95%) contrast(90%);
-`;
+    `;
 
 export const EnergyIcon = Styled(Energy)`
     ${IconCss};
-    //filter: invert(79%) sepia(16%) saturate(1182%) hue-rotate(63deg) brightness(95%) contrast(90%);
+    
 `;
 
 export const IllnessIcon = Styled(Illness)`

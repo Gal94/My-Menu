@@ -26,7 +26,7 @@ export const StyledButtonContainer = Styled.div`
             right: 0;
             top: 100%;
             z-index: -1;
-            -webkit-transition: top 0.09s ease-in;
+            transition: top 0.09s ease-in;
           }
 
         &:hover:before {

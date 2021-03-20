@@ -3,6 +3,7 @@ import { ReactComponent as Relax } from './relax.svg';
 
 export const FeaturesContainer = Styled.div`
     height: 100vh;
+    min-height: 50rem;
     background-color: #eee;
     padding-bottom: 3rem;
 
