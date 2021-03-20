@@ -4,11 +4,12 @@ import { BrowserRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import authReducer from './store/reducers/authReducer';
 import './index.css';
 import App from './App';
 
 // Add reducers here
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({ auth: authReducer });
 
 // Enable dev tools for debugging
 const composeEnhancers =

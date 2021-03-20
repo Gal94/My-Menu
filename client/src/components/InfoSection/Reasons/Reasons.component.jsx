@@ -49,7 +49,7 @@ const InfoSectionReasons = () => {
     // loop through reasons object and render each reason icon/text
     for (const key in reasons) {
         reasonsElements.push(
-            <Reason>
+            <Reason key={key}>
                 <IconDiv>{reasons[key].icon}</IconDiv>
                 <ReasonText>{reasons[key].text}</ReasonText>
             </Reason>

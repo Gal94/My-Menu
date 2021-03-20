@@ -5,6 +5,10 @@ body {
     font-family: 'Rubik', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* 
+    @media screen (min-width: 1024px) {
+        box-sizing: border-box;
+    } */
 }
 
 code {

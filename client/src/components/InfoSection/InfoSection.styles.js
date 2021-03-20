@@ -2,7 +2,9 @@ import Styled from 'styled-components';
 
 export const InfoSectionContainer = Styled.div`
     height: 100vh;
+    min-height: fit-content;
     background-color: #02A688;
+    padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -15,8 +17,12 @@ export const InfoSectionInnerContainer = Styled.div`
 `;
 //05f2c7
 export const GetStartedContainer = Styled.div`
-    width: 20rem;
-    margin: auto;
+    margin: 0 auto 0 ;
+    width: 90%;
+
+    @media screen and (min-width: 1280px) {
+        width: 20rem;
+    }
 `;
 
 export const GetStarted = Styled.div`
@@ -26,9 +32,8 @@ export const GetStarted = Styled.div`
     border-top: 2.5px solid;
     border-left: 2.5px solid;
     border-radius: .2rem;
-    width: 20rem;
     height: 5rem;
-    margin: 2rem auto 0;
+    margin: 1rem auto 0;
     display: flex;
     flex-direction: column;
     justify-content: center;

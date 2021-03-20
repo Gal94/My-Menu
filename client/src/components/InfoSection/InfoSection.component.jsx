@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router';
 import InfoSectionReasons from './Reasons/Reasons.component';
 
 import {
@@ -11,6 +12,8 @@ import {
 
 //TODO Add content
 const InfoSection = () => {
+    const History = useHistory();
+
     return (
         <InfoSectionContainer id='Info'>
             <InfoSectionInnerContainer>
@@ -18,7 +21,11 @@ const InfoSection = () => {
             </InfoSectionInnerContainer>
             {/* Tips for Healthy eating */}
             <GetStartedContainer>
-                <GetStarted>
+                <GetStarted
+                    onClick={() => {
+                        History.push('/auth');
+                    }}
+                >
                     <GetStartedTitle>Let's Get Started</GetStartedTitle>
                     <GetStartedText>
                         Click here to start building your menu
