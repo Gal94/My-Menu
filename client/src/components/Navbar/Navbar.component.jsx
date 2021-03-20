@@ -1,11 +1,19 @@
-import { useEffect, useState } from 'react';
-import { NavbarContainer } from './Navbar.styles';
-
-//TODO Add content and appropriate styles to navbar
+import { useEffect, useState, Fragment } from 'react';
+import { connect } from 'react-redux';
+import {
+    NavbarContainer,
+    NavbarItem,
+    NavbarItems,
+    NavbarLink,
+} from './Navbar.styles';
+import { LOGOUT } from '../../store/actionTypes';
 
 let listener;
 
-const Navbar = () => {
+// TODO : Make transparent color only on homepage
+// TODO : Add homepage Link
+
+const Navbar = (props) => {
     const [isTop, setIsTop] = useState(true);
 
     useEffect(() => {
@@ -31,11 +39,43 @@ const Navbar = () => {
         };
     }, [isTop]);
 
+    const logout = () => {
+        localStorage.removeItem('MyMenuToken');
+        props.onLogout();
+    };
+
     return (
         <NavbarContainer isTransparent={isTop}>
-            Its a navbar thats needs to be implemented
+            <NavbarItems isTransparent={isTop}>
+                {props.token && (
+                    <Fragment>
+                        <NavbarItem>
+                            <NavbarLink to='/#'>My Profile</NavbarLink>
+                        </NavbarItem>
+                        <NavbarItem onClick={logout}>Logout</NavbarItem>
+                    </Fragment>
+                )}
+
+                {!props.token && (
+                    <NavbarItem>
+                        <NavbarLink to='/login'>Sign in</NavbarLink>
+                    </NavbarItem>
+                )}
+            </NavbarItems>
         </NavbarContainer>
     );
 };
 
-export default Navbar;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onLogout: () => dispatch({ type: LOGOUT }),
+    };
+};
+
+const mapStateToProps = (state) => {
+    return {
+        token: state.auth.jwtToken,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

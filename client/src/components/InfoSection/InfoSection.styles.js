@@ -15,7 +15,7 @@ export const InfoSectionInnerContainer = Styled.div`
     margin: 5rem auto 0;
     text-align: center;
 `;
-//05f2c7
+
 export const GetStartedContainer = Styled.div`
     margin: 0 auto 0 ;
     width: 90%;

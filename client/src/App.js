@@ -1,6 +1,6 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
-import Spinner from './components/Spinner/Spinner.component';
+import { connect } from 'react-redux';
 import Navbar from './components/Navbar/Navbar.component';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +11,16 @@ const Auth = React.lazy(() =>
     import('./pages/Authenticate/Authenticate.component')
 );
 
-function App() {
+function App(props) {
+    useEffect(() => {
+        const token = localStorage.getItem('MyMenuToken');
+        if (!token) {
+            return;
+        }
+
+        props.setUser(token);
+    }, []);
+
     return (
         <div className='App'>
             <ToastContainer
@@ -30,7 +39,7 @@ function App() {
                 <Route path='/' exact>
                     <Home />
                 </Route>
-                <Route path='/auth' exact>
+                <Route path='/login' exact>
                     <Suspense fallback={<div></div>}>
                         <Auth />
                     </Suspense>
@@ -41,4 +50,10 @@ function App() {
     );
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setUser: (token) => dispatch({ type: 'SET_USER', token: token }),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(App);

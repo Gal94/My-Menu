@@ -13,6 +13,17 @@ const reducer = (state = initialState, action) => {
                 jwtToken: action.token,
                 user: action.token,
             };
+        case actionTypes.LOGOUT:
+            return {
+                ...state,
+                user: null,
+                jwtToken: null,
+            };
+        case actionTypes.SET_USER:
+            return {
+                ...state,
+                jwtToken: action.token,
+            };
         default:
             return { ...state };
     }
