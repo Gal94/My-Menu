@@ -14,11 +14,12 @@ const Auth = React.lazy(() =>
 function App(props) {
     useEffect(() => {
         const token = localStorage.getItem('MyMenuToken');
+        const user = JSON.parse(localStorage.getItem('User'));
         if (!token) {
             return;
         }
 
-        props.setUser(token);
+        props.setUser(token, user);
     }, []);
 
     return (
@@ -52,7 +53,8 @@ function App(props) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setUser: (token) => dispatch({ type: 'SET_USER', token: token }),
+        setUser: (token, user) =>
+            dispatch({ type: 'SET_USER', token: token, user: user }),
     };
 };
 

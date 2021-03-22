@@ -11,7 +11,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 jwtToken: action.token,
-                user: action.token,
+                user: action.user,
             };
         case actionTypes.LOGOUT:
             return {
@@ -23,6 +23,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 jwtToken: action.token,
+                user: action.user,
             };
         default:
             return { ...state };

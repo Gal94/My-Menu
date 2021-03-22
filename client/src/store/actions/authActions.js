@@ -28,10 +28,10 @@ export const login = (email, password) => {
 
                 // Store credentials in local storage
                 localStorage.setItem('MyMenuToken', data.token);
+                localStorage.setItem('User', JSON.stringify(data.user));
 
                 // display a message to the user
                 toast.success('Logged in successfully');
-
             } else {
                 toast.error(data.message);
             }

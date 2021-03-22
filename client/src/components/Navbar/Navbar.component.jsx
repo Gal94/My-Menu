@@ -40,7 +40,7 @@ const Navbar = (props) => {
     }, [isTop]);
 
     const logout = () => {
-        localStorage.removeItem('MyMenuToken');
+        localStorage.clear();
         props.onLogout();
     };
 
