@@ -46,6 +46,10 @@ const userSchema = new Schema({
             ref: 'Weight',
         },
     ],
+    goal: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Goal'
+    },
     resetToken: String,
     resetTokenExpiration: Date,
 });
