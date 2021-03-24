@@ -2,8 +2,14 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { isAuthenticated } from '../../helpers/protectedRoute';
-import { ProfilePageWrapper, SideMenu } from './Profile.styles';
+import {
+    ProfilePageContentWrapper,
+    ProfilePageWrapper,
+    SideMenu,
+    SideMenuWrapper,
+} from './Profile.styles';
 import PropTypes from 'prop-types';
+import SideMenuItems from '../../components/SideMenuItems/SideMenuItems.component';
 
 // check if a user is authenticated
 
@@ -17,8 +23,14 @@ const Profile = (props) => {
 
     return (
         <ProfilePageWrapper>
-            Profile page
-            <SideMenu menuActive={props.showMenu}>Side menu items</SideMenu>
+            <SideMenuWrapper>
+                <SideMenu menuActive={props.showMenu}>
+                    <SideMenuItems />
+                </SideMenu>
+            </SideMenuWrapper>
+            <ProfilePageContentWrapper>
+                The profile router
+            </ProfilePageContentWrapper>
         </ProfilePageWrapper>
     );
 };
