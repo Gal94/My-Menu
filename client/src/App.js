@@ -20,7 +20,7 @@ function App(props) {
         }
 
         props.setUser(token, user);
-    }, []);
+    });
 
     return (
         <div className='App'>
@@ -41,6 +41,11 @@ function App(props) {
                     <Home />
                 </Route>
                 <Route path='/login' exact>
+                    <Suspense fallback={<div></div>}>
+                        <Auth />
+                    </Suspense>
+                </Route>
+                <Route path='/register' exact>
                     <Suspense fallback={<div></div>}>
                         <Auth />
                     </Suspense>

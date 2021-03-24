@@ -6,6 +6,8 @@ export const AuthenticatePage = Styled.div`
     background-color: #f0f0f0;
     height: 100vh;
     width: 100vw;
+    display: flex;
+    justify-content: space-between;
 `;
 
 export const PageCard = Styled.div`

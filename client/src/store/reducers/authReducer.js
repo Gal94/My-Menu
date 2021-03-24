@@ -19,6 +19,10 @@ const reducer = (state = initialState, action) => {
                 user: null,
                 jwtToken: null,
             };
+        case actionTypes.REGISTER_SUCCESS:
+            return {
+                ...state,
+            };
         case actionTypes.SET_USER:
             return {
                 ...state,

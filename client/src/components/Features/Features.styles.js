@@ -19,7 +19,11 @@ export const FeaturesContainer = Styled.div`
 export const FeaturesDescContainer = Styled.div`
     width: fit-content;
     margin: auto;
-    padding-top: 4rem;
+    padding-top: 6rem;
+
+    @media screen and (min-width: 1280px) {
+        padding-top: 0rem;
+    }
 `;
 
 export const FeaturesTitle = Styled.h1`

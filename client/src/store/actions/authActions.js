@@ -40,3 +40,37 @@ export const login = (email, password) => {
         }
     };
 };
+
+export const register = (email, password) => {
+    return async (dispatch) => {
+        try {
+            let user = { email, password };
+            let response = await fetch(
+                'http://localhost:5000/api/auth/register',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(user),
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.status < 400) {
+                dispatch({
+                    type: actionTypes.REGISTER_SUCCESS,
+                });
+                toast.success('Registered successfully, logging in...');
+                return true;
+            } else {
+                toast.error(data.message);
+                return null;
+            }
+        } catch (error) {
+            toast.error('Failed to Register, please try again later.');
+            return null;
+        }
+    };
+};

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import { login } from '../../../store/actions/authActions';
+import { login, register } from '../../../store/actions/authActions';
 import {
     Form,
     FormInput,
@@ -12,20 +12,22 @@ import {
     SignInForm,
     StyledFormButton,
     StyledH1,
-} from './LoginForm.styles';
+} from './AuthForm.styles';
 
-const LoginForm = (props) => {
+const AuthForm = (props) => {
     const [fields, setFields] = useState({
         email: '',
         password: '',
     });
+
+    const formType = props.formType;
 
     const History = useHistory();
 
     // Redirect in case user is logged in
     useEffect(() => {
         localStorage.getItem('MyMenuToken') && History.push('/');
-    }, []);
+    }, [History]);
 
     const inputChangeHandler = (event) => {
         const newFields = { ...fields };
@@ -34,7 +36,7 @@ const LoginForm = (props) => {
     };
 
     // Validate email and password fields
-    const validateLoginForm = () => {
+    const validateForm = () => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!re.test(String(fields.email).toLowerCase().trim())) {
             toast.error('Please provide a valid email.');
@@ -49,23 +51,43 @@ const LoginForm = (props) => {
     // Submit form and return to homepage upon logging in
     const onSubmitForm = async (e) => {
         e.preventDefault();
-        if (!validateLoginForm()) {
+        if (!validateForm()) {
             return;
         }
 
-        // dispatch a login request
-        await props.onLogin(fields.email, fields.password);
-        if (localStorage.getItem('MyMenuToken')) {
-            History.goBack();
+        // Check if needs to register
+        let canLogin = true;
+        if (formType === 'register') {
+            canLogin = await props.onRegister(fields.email, fields.password);
+        }
+
+        // dispatch a login request for both registered user or created user
+        if (canLogin === true) {
+            await props.onLogin(fields.email, fields.password);
+            if (localStorage.getItem('MyMenuToken')) {
+                History.push('/');
+            }
         }
     };
+
+    const formTitle = (
+        <StyledH1>{formType === 'login' ? 'Sign in' : 'Register'}</StyledH1>
+    );
+
+    const formButton =
+        formType === 'login' ? (
+            <StyledFormButton>sign in</StyledFormButton>
+        ) : (
+            <StyledFormButton type='register'>Register</StyledFormButton>
+        );
 
     return (
         <LoginPageWrapper>
             <SignInForm>
                 <Form onSubmit={onSubmitForm}>
-                    <StyledH1>Sign in</StyledH1>
+                    {formTitle}
                     <FormInput
+                        autoComplete='new-password'
                         value={fields.email}
                         type='email'
                         name='email'
@@ -73,14 +95,24 @@ const LoginForm = (props) => {
                         onChange={inputChangeHandler}
                     />
                     <FormInput
+                        autoComplete='new-password'
                         type='password'
                         name='password'
                         value={fields.password}
                         placeholder='Password'
                         onChange={inputChangeHandler}
                     />
-                    <p>Forgot your password?</p>
-                    <StyledFormButton>sign in</StyledFormButton>
+                    <p
+                        style={
+                            formType === 'login'
+                                ? { opacity: 1, cursor: 'text' }
+                                : { opacity: 0, cursor: 'default' }
+                        }
+                    >
+                        Forgot your password?
+                    </p>
+
+                    {formButton}
                 </Form>
             </SignInForm>
         </LoginPageWrapper>
@@ -90,7 +122,8 @@ const LoginForm = (props) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onLogin: (email, password) => dispatch(login(email, password)),
+        onRegister: (email, password) => dispatch(register(email, password)),
     };
 };
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(null, mapDispatchToProps)(AuthForm);

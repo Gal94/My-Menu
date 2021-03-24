@@ -1,12 +1,19 @@
-import { useState } from 'react';
-import LoginForm from '../../components/Forms/LoginForm/LoginForm.component';
+import { useHistory } from 'react-router-dom';
+import AuthForm from '../../components/Forms/LoginForm/AuthForm.component';
 import { AuthenticatePage, PageCard } from './Authenticate.styles';
 
-const Authenticate = () => {
-    const [formType, setFormType] = useState('login');
+const Authenticate = (props) => {
+    const history = useHistory();
     return (
         <AuthenticatePage>
-            <PageCard>{formType === 'login' && <LoginForm />}</PageCard>
+            <PageCard>
+                {history.location.pathname === '/login' && (
+                    <AuthForm formType='login' />
+                )}
+                {history.location.pathname === '/register' && (
+                    <AuthForm formType='register' />
+                )}
+            </PageCard>
         </AuthenticatePage>
     );
 };

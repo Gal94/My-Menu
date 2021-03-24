@@ -1,14 +1,6 @@
 import Styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const backgroundStyle = (props) => {
-    if (props.isTransparent) {
-        return transparentCss;
-    } else {
-        return coloredCss;
-    }
-};
-
 export const transparentCss = css`
     background-color: transparent;
     transition: all 0.5s linear;
@@ -31,37 +23,31 @@ export const NavbarContainer = Styled.nav`
     height: 4rem;
     border: none;
     z-index: 100;
-    ${backgroundStyle}
+    ${coloredCss}
 `;
-
-const listStyle = (props) => {
-    if (props.isTransparent) {
-        return css`
-            color: white;
-        `;
-    } else {
-        return css`
-            color: white;
-        `;
-    }
-};
 
 export const NavbarItems = Styled.ul`  
     display: flex;
-    justify-content: flex-end;
     list-style: none;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
-    ${listStyle}
+    padding: 0;
+    margin-right: 0rem;
 `;
 
 export const NavbarItem = Styled.li`
     width: fit-content;
-    margin-right: 1rem;
+    margin-right: 0.7rem;
     cursor: pointer;
-
+    color: white;
+    font-size: 14px;
     &:active {
         color: #c0c0c0;
+    }
+
+    @media screen and (min-width: 600px) {
+        font-size: 16px;
     }
 
 `;

@@ -8,12 +8,12 @@ export const StyledButtonContainer = Styled.div`
     padding: .5rem 1rem;
     margin-top: .5rem;
     color: white;
+    cursor: pointer;
     z-index: 1;
     text-shadow: -0.5px -0.5px #215218;
 
     @media screen and (min-width: 1024px) {
         font-size: 1.5rem;
-        cursor: pointer;
         position: relative;
         background: transparent;
         
