@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
     NavbarContainer,
@@ -7,31 +8,41 @@ import {
     NavbarLink,
 } from './Navbar.styles';
 import { LOGOUT } from '../../store/actionTypes';
+import { toggleSideMenu } from '../../store/actions/UiActions';
 
 const Navbar = (props) => {
+    const history = useHistory();
+
     const logout = () => {
         localStorage.clear();
         props.onLogout();
+        history.push('/');
     };
 
     return (
         <NavbarContainer>
             <NavbarItems>
-                <NavbarItem style={{ paddingLeft: '.5rem' }}>
-                    <NavbarLink to='/'>Home</NavbarLink>
+                <NavbarItem
+                    style={{ paddingLeft: '.5rem' }}
+                    onClick={props.toggleMenu}
+                >
+                    Hamb Icon
                 </NavbarItem>
                 <div
                     style={{
                         display: 'flex',
                     }}
                 >
+                    <NavbarItem style={{ paddingLeft: '.5rem' }}>
+                        <NavbarLink to='/'>Home</NavbarLink>
+                    </NavbarItem>
                     {props.token && (
                         <Fragment>
                             <NavbarItem>
-                                <NavbarLink to='/#'>Menus</NavbarLink>
+                                <NavbarLink to='/#'>New Menu</NavbarLink>
                             </NavbarItem>
                             <NavbarItem>
-                                <NavbarLink to='/#'>Profile</NavbarLink>
+                                <NavbarLink to='/profile'>Profile</NavbarLink>
                             </NavbarItem>
                             <NavbarItem onClick={logout}>Logout</NavbarItem>
                         </Fragment>
@@ -56,6 +67,7 @@ const Navbar = (props) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onLogout: () => dispatch({ type: LOGOUT }),
+        toggleMenu: () => dispatch(toggleSideMenu()),
     };
 };
 

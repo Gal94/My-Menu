@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home/Home.component';
 import './App.css';
+import Profile from './pages/Profile/Profile.component';
 
 const Auth = React.lazy(() =>
     import('./pages/Authenticate/Authenticate.component')
@@ -48,6 +49,11 @@ function App(props) {
                 <Route path='/register' exact>
                     <Suspense fallback={<div></div>}>
                         <Auth />
+                    </Suspense>
+                </Route>
+                <Route path='/profile'>
+                    <Suspense fallback={<div></div>}>
+                        <Profile />
                     </Suspense>
                 </Route>
                 <Redirect to='/' />

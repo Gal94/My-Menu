@@ -5,11 +5,12 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import authReducer from './store/reducers/authReducer';
+import UiReducer from './store/reducers/UiReducer';
 import './index.css';
 import App from './App';
 
 // Add reducers here
-const rootReducer = combineReducers({ auth: authReducer });
+const rootReducer = combineReducers({ auth: authReducer, ui: UiReducer });
 
 // Enable dev tools for debugging
 const composeEnhancers =
