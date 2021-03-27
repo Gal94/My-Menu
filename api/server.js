@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import { authRouter } from './routes/auth.routes.js';
+import { profileRouter } from './routes/profile.routes.js';
 
 const app = express();
 dotenv.config();
@@ -13,20 +14,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use('/api/auth', authRouter);
+app.use('/api/profile', profileRouter);
 
 app.get('/', (req, res) => {
-    console.log('here');
     res.send('success');
 });
-
-// Log only errors
-// app.use(
-//     morgan('combined', {
-//         skip: (req, res) => {
-//             return res.statusCode < 400;
-//         },
-//     })
-// );
 
 app.use((err, req, res, next) => {
     // Delete the file if is in the request
