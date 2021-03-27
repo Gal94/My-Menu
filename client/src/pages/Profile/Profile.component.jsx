@@ -1,6 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Switch, Route } from 'react-router';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import { isAuthenticated } from '../../helpers/protectedRoute';
 import {
     ProfilePageContentWrapper,
@@ -8,7 +11,6 @@ import {
     SideMenu,
     SideMenuWrapper,
 } from './Profile.styles';
-import PropTypes from 'prop-types';
 import SideMenuItems from '../../components/SideMenuItems/SideMenuItems.component';
 
 // check if a user is authenticated
@@ -29,7 +31,26 @@ const Profile = (props) => {
                 </SideMenu>
             </SideMenuWrapper>
             <ProfilePageContentWrapper>
-                The profile router
+                <Switch>
+                    <Route path='/profile/' exact>
+                        <div>Profile page</div>
+                    </Route>
+                    <Route path='/profile/menu/' exact>
+                        <Suspense fallback={<div></div>}>
+                            <div>Menu page component</div>
+                        </Suspense>
+                    </Route>
+                    <Route path='/profile/info/' exact>
+                        <Suspense fallback={<div></div>}>
+                            <div>Info page component</div>
+                        </Suspense>
+                    </Route>
+                    <Route path='/profile/macros/' exact>
+                        <Suspense fallback={<div></div>}>
+                            <div>Macros page component</div>
+                        </Suspense>
+                    </Route>
+                </Switch>
             </ProfilePageContentWrapper>
         </ProfilePageWrapper>
     );

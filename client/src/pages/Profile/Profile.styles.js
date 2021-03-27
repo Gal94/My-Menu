@@ -43,7 +43,9 @@ export const SideMenu = Styled.div`
 
 export const ProfilePageContentWrapper = Styled.div`
     padding-top: 10rem;
-    width: 100vw;
+    width: 90vw;
+    margin: 0 auto;
+    text-align: center;
 
     @media (min-width: 1024px) {
         width: initial;

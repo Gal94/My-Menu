@@ -1,26 +1,57 @@
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import { toggleSideMenu } from '../../store/actions/UiActions';
 import {
     SideMenuItem,
     SideMenuItemsContainer,
     SideMenuLink,
 } from './SideMenuItems.styles';
 
-const SideMenuItems = () => {
+const SideMenuItems = (props) => {
     return (
         <SideMenuItemsContainer>
             <SideMenuItem>
-                <SideMenuLink to='/profile/graphs'>Graphs</SideMenuLink>
+                <SideMenuLink onClick={props.toggleCloseMenu} to='/profile'>
+                    View Profile
+                </SideMenuLink>
             </SideMenuItem>
             <SideMenuItem>
-                <SideMenuLink to='/profile/menu'>Menus</SideMenuLink>
+                <SideMenuLink
+                    onClick={props.toggleCloseMenu}
+                    to='/profile/menu'
+                >
+                    Menus
+                </SideMenuLink>
             </SideMenuItem>
             <SideMenuItem>
-                <SideMenuLink to='/profile/info'>My Info</SideMenuLink>
+                <SideMenuLink
+                    onClick={props.toggleCloseMenu}
+                    to='/profile/info'
+                >
+                    My Info
+                </SideMenuLink>
             </SideMenuItem>
             <SideMenuItem>
-                <SideMenuLink to='/profile/macros'>Macros</SideMenuLink>
+                <SideMenuLink
+                    onClick={props.toggleCloseMenu}
+                    to='/profile/macros'
+                >
+                    Macros
+                </SideMenuLink>
             </SideMenuItem>
         </SideMenuItemsContainer>
     );
 };
 
-export default SideMenuItems;
+SideMenuItems.propTypes = {
+    toggleCloseMenu: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        toggleCloseMenu: () => dispatch(toggleSideMenu()),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(SideMenuItems);
