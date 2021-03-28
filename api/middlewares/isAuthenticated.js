@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
+import User from '../models/User.schema.js';
 
-export const isAuthenticated = (req, res, next) => {
+export const isAuthenticated = async (req, res, next) => {
     const authHeader = req.get('Authorization');
-
     // Not Authorized
     if (!authHeader) {
         req.isAuth = false;
@@ -28,5 +28,6 @@ export const isAuthenticated = (req, res, next) => {
     }
 
     req.isAuth = match._id;
+    req.user = await User.findById(match._id);
     return next();
 };

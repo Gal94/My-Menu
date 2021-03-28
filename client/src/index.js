@@ -6,11 +6,16 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import authReducer from './store/reducers/authReducer';
 import UiReducer from './store/reducers/UiReducer';
+import profileReducer from './store/reducers/profileReducer';
 import './index.css';
 import App from './App';
 
 // Add reducers here
-const rootReducer = combineReducers({ auth: authReducer, ui: UiReducer });
+const rootReducer = combineReducers({
+    auth: authReducer,
+    ui: UiReducer,
+    profile: profileReducer,
+});
 
 // Enable dev tools for debugging
 const composeEnhancers =

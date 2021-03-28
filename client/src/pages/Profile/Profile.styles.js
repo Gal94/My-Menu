@@ -30,9 +30,10 @@ export const SideMenu = Styled.div`
     width: 40%;
     left: 0;
     top: 0;
-    padding-top: 10rem;
+    padding-top: 6rem;
     transform: translateX(-100%);
     transition: all .7s ease-out;
+    z-index: 10;
 
     @media (min-width: 1024px) {
         width: 20rem;
@@ -42,10 +43,10 @@ export const SideMenu = Styled.div`
 `;
 
 export const ProfilePageContentWrapper = Styled.div`
-    padding-top: 10rem;
+    padding-top: 6rem;
     width: 90vw;
     margin: 0 auto;
-    text-align: center;
+    // text-align: center;
 
     @media (min-width: 1024px) {
         width: initial;

@@ -13,22 +13,20 @@ const userSchema = new Schema({
     firstName: {
         type: String,
         trim: true,
+        default: 'New User',
     },
     lastName: {
         type: String,
+        default: '',
     },
     password: {
         type: String,
         required: 'Password field is required',
     },
-    gender: {
-        required: false,
-        type: String,
-        default: 'Unspecified',
-    },
     age: {
         required: false,
         type: Number,
+        default: '',
     },
     joined: {
         type: Date,
@@ -48,7 +46,7 @@ const userSchema = new Schema({
     ],
     goal: {
         type: mongoose.Types.ObjectId,
-        ref: 'Goal'
+        ref: 'Goal',
     },
     resetToken: String,
     resetTokenExpiration: Date,

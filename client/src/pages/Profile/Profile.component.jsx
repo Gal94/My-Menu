@@ -12,6 +12,7 @@ import {
     SideMenuWrapper,
 } from './Profile.styles';
 import SideMenuItems from '../../components/SideMenuItems/SideMenuItems.component';
+import ProfileInfo from './ProfileInfo/ProfileInfo.component';
 
 // check if a user is authenticated
 
@@ -42,7 +43,7 @@ const Profile = (props) => {
                     </Route>
                     <Route path='/profile/info/' exact>
                         <Suspense fallback={<div></div>}>
-                            <div>Info page component</div>
+                            <ProfileInfo />
                         </Suspense>
                     </Route>
                     <Route path='/profile/macros/' exact>

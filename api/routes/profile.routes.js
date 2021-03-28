@@ -6,9 +6,23 @@ NOTES:
 */
 
 import express from 'express';
-import { getProfileInfo } from '../controllers/profile.controller.js';
+import { body } from 'express-validator';
+
+import {
+    getProfileInfo,
+    putProfileInfo,
+} from '../controllers/profile.controller.js';
 import { isAuthenticated } from '../middlewares/isAuthenticated.js';
 
 export const profileRouter = express.Router();
 
 profileRouter.get('/info', isAuthenticated, getProfileInfo);
+profileRouter.put(
+    '/info',
+    body('email').isEmail(),
+    body('age').isNumeric(),
+    body('firstName').trim().isAlpha(),
+    body('lastName').trim().isAlpha(),
+    isAuthenticated,
+    putProfileInfo
+);
