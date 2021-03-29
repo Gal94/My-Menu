@@ -2,6 +2,7 @@ import * as actionTypes from '../actionTypes';
 
 const initialState = {
     userInfo: null,
+    macros: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 userInfo: action.userInfo,
+            };
+        case actionTypes.UPDATE_USER_MACROS:
+            return {
+                ...state,
+                macros: action.macros,
             };
         default:
             return {

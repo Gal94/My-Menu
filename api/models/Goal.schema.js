@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
+// One to One relationship, each user has 1 goal, each goal has 1 user.
 const goalSchema = new Schema({
     userId: {
         type: mongoose.Types.ObjectId,
@@ -23,6 +24,9 @@ const goalSchema = new Schema({
         type: Number,
         required: 'Fats field is required',
     },
+    goalWeight: {
+        type: Number,
+    }
 });
 
 export default mongoose.model('Goal', goalSchema);

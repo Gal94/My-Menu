@@ -1,7 +1,9 @@
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
+import mongoose from 'mongoose';
 
 import User from '../models/User.schema.js';
+import Goal from '../models/Goal.schema.js';
 import HttpError from '../util/httpError.js';
 
 // Fetch and return  all user info
@@ -26,6 +28,10 @@ export const getProfileInfo = async (req, res, next) => {
 };
 
 export const putProfileInfo = async (req, res, next) => {
+    // not authenticated
+    if (!req.isAuth) {
+        return next(new HttpError('Not Authorized', 401));
+    }
     const { errors } = validationResult(req);
     const userInfo = req.body;
     // Check if there are any validation errors
@@ -71,4 +77,40 @@ export const putProfileInfo = async (req, res, next) => {
     return res.status(201).json({
         user: updatedUser.toObject({ getters: true }),
     });
+};
+
+export const getMacros = async (req, res, next) => {
+    if (!req.isAuth) {
+        return next(new HttpError('Not Authorized', 401));
+    }
+
+    const fetchedUser = await User.findById(req.isAuth).exec();
+    // check if there are no goals set already
+
+    if (!fetchedUser.goal) {
+        const newGoal = new Goal({
+            userId: req.isAuth,
+            calories: 0,
+            carbs: 0,
+            proteins: 0,
+            fats: 0,
+            goalWeight: 0,
+        });
+
+        // create a default goal - saves changes in a session
+        try {
+            const session = await mongoose.startSession();
+            session.startTransaction();
+            const goalObj = await newGoal.save({ session: session });
+            fetchedUser.goal = goalObj._id;
+            await fetchedUser.save({ session: session });
+            await session.commitTransaction();
+        } catch (err) {
+            return next(new HttpError('Something went wrong', 500));
+        }
+    }
+
+    const goalToReturn = await Goal.findOne({ userId: req.isAuth });
+
+    return res.status(201).json({ goal: goalToReturn });
 };

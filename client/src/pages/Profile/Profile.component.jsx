@@ -13,6 +13,7 @@ import {
 } from './Profile.styles';
 import SideMenuItems from '../../components/SideMenuItems/SideMenuItems.component';
 import ProfileInfo from './ProfileInfo/ProfileInfo.component';
+import MacrosPage from './MacrosPage/MacrosPage.component';
 
 // check if a user is authenticated
 
@@ -48,7 +49,7 @@ const Profile = (props) => {
                     </Route>
                     <Route path='/profile/macros/' exact>
                         <Suspense fallback={<div></div>}>
-                            <div>Macros page component</div>
+                            <MacrosPage />
                         </Suspense>
                     </Route>
                 </Switch>
