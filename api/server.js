@@ -42,7 +42,7 @@ mongoose
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true,
-        useFineAndModify: true,
+        useFindAndModify: false,
     })
     .then(() => {
         app.listen(5000, () => {

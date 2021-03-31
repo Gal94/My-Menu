@@ -14,6 +14,9 @@ import {
 } from './MacrosForm.styles';
 import MacroPieChart from './MacroPieChart/MacroPieChart.component';
 
+//TODO: Logic to submit form
+// TODO: Make this component pc responsive
+
 const MacrosForm = (props) => {
     const [state, setState] = useState({
         calories: 0,
@@ -28,6 +31,39 @@ const MacrosForm = (props) => {
             const newState = { ...state };
             newState[event.target.name] = +event.target.value;
             setState(newState);
+        }
+    };
+
+    //once form is submitted
+    const onSubmitForm = async (event) => {
+        event.preventDefault();
+        // logic to check values
+
+        try {
+            const response = await fetch(
+                'http://localhost:5000/api/profile/macros',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization:
+                            'Bearer ' + localStorage.getItem('MyMenuToken'),
+                    },
+                    body: JSON.stringify(state),
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.status >= 400) {
+                console.log(data);
+                toast.error(data.message);
+            }
+
+            // update the profile reducer with the new goals
+            props.onUpdateMacros(data.goal);
+        } catch (err) {
+            toast.error('Failed to save changed');
         }
     };
 
@@ -64,12 +100,22 @@ const MacrosForm = (props) => {
     };
 
     useEffect(() => {
-        getUserMacros();
+        // check if the macros object is empty (never fetched macros)
+        if (Object.keys(props.macros).length === 0) {
+            getUserMacros();
+        } else {
+            setState({
+                calories: props.macros.calories,
+                fats: props.macros.fats,
+                proteins: props.macros.proteins,
+                carbs: props.macros.carbs,
+            });
+        }
     }, []);
 
     return (
         <MacrosPageFormDiv>
-            <MacrosPageStyledForm>
+            <MacrosPageStyledForm onSubmit={onSubmitForm}>
                 <MacrosPageInputContainer>
                     <MacrosPageLabel htmlFor='calories'>
                         Calories

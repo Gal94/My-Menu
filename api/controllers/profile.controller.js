@@ -114,3 +114,30 @@ export const getMacros = async (req, res, next) => {
 
     return res.status(201).json({ goal: goalToReturn });
 };
+
+//TODO: validation
+export const putMacros = async (req, res, next) => {
+    const { calories, fats, proteins, carbs } = req.body;
+    try {
+        // update the goal saved in the db and return to user
+        const updatedGoal = await Goal.findOneAndUpdate(
+            { userId: req.isAuth },
+            {
+                calories,
+                fats,
+                proteins,
+                carbs,
+            },
+            { new: true }
+        );
+
+        if (!updatedGoal) {
+            return next(new HttpError('Failed to update your goal', 400));
+        }
+
+        return res.status(200).json({ goal: updatedGoal });
+    } catch (err) {
+        console.log(err);
+        return next(new HttpError('Something went wrong', 500));
+    }
+};

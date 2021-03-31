@@ -11,6 +11,7 @@ import { body } from 'express-validator';
 import {
     getMacros,
     getProfileInfo,
+    putMacros,
     putProfileInfo,
 } from '../controllers/profile.controller.js';
 import { isAuthenticated } from '../middlewares/isAuthenticated.js';
@@ -28,3 +29,4 @@ profileRouter.put(
     putProfileInfo
 );
 profileRouter.get('/macros', isAuthenticated, getMacros);
+profileRouter.put('/macros', isAuthenticated, putMacros);
