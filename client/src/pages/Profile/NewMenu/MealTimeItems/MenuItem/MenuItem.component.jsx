@@ -15,6 +15,7 @@ import {
     LineBreak,
 } from './MenuItem.styles';
 import MenuPieChart from '../../../../../components/MenuPieChart/MenuPieChart.component';
+import DailyValues from '../../../../../components/DailyValues/DailyValues.component';
 
 const MenuItem = (props) => {
     const { item } = props;
@@ -41,6 +42,7 @@ const MenuItem = (props) => {
                     </MenuItemPieChart>
                     <LineBreak />
                     {/* Percent of Daily value component */}
+                    <DailyValues item={item} />
                     <LineBreak />
                     {/* Nutrition Facts */}
                 </MenuItemInnerDiv>
