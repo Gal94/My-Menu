@@ -117,6 +117,19 @@ export const getMacros = async (req, res, next) => {
 
 //TODO: validation
 export const putMacros = async (req, res, next) => {
+    if (!req.isAuth) {
+        return next(new HttpError('Not Authorized', 401));
+    }
+
+    //* in the case of validation errors
+    const { errors } = validationResult(req);
+
+    if (errors.length > 0) {
+        return next(new HttpError(`${errors[0].param} has ${errors[0].msg}`));
+    }
+
+
+    //* All was clear
     const { calories, fats, proteins, carbs } = req.body;
     try {
         // update the goal saved in the db and return to user

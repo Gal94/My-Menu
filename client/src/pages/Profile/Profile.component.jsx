@@ -14,6 +14,7 @@ import {
 import SideMenuItems from '../../components/SideMenuItems/SideMenuItems.component';
 import ProfileInfo from './ProfileInfo/ProfileInfo.component';
 import MacrosPage from './MacrosPage/MacrosPage.component';
+import NewMenu from './NewMenu/NewMenu.component';
 
 // check if a user is authenticated
 
@@ -46,6 +47,9 @@ const Profile = (props) => {
                         <Suspense fallback={<div></div>}>
                             <ProfileInfo />
                         </Suspense>
+                    </Route>
+                    <Route path='/profile/new-menu' exact>
+                        <NewMenu />
                     </Route>
                     <Route path='/profile/macros/' exact>
                         <Suspense fallback={<div></div>}>

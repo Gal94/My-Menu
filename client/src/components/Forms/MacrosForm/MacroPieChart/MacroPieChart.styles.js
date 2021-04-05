@@ -11,7 +11,7 @@ export const MacroPieChartLegend = Styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    width: 30%;
+    width: 40%;
     padding-bottom: 3rem;
 `;
 

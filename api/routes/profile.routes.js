@@ -29,4 +29,6 @@ profileRouter.put(
     putProfileInfo
 );
 profileRouter.get('/macros', isAuthenticated, getMacros);
+
+//calories, fats, carbs, proteins
 profileRouter.put('/macros', isAuthenticated, putMacros);

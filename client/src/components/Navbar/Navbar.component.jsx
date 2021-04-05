@@ -39,7 +39,9 @@ const Navbar = (props) => {
                     {props.token && (
                         <Fragment>
                             <NavbarItem>
-                                <NavbarLink to='/#'>New Menu</NavbarLink>
+                                <NavbarLink to='/profile/new-menu'>
+                                    New Menu
+                                </NavbarLink>
                             </NavbarItem>
                             <NavbarItem>
                                 <NavbarLink to='/profile'>Profile</NavbarLink>

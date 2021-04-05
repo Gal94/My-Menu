@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import 'rc-tooltip/assets/bootstrap.css';
+// import 'rc-tooltip/assets/bootstrap.css';
 import { updateUserMacros } from '../../../store/actions/profileActions';
 import {
     MacrosPageStyledForm,
@@ -11,10 +11,10 @@ import {
     MacrosPageLabel,
     MacrosPageInput,
     MacrosPageNutrientsContainer,
+    MacroFormSubmitButton,
 } from './MacrosForm.styles';
 import MacroPieChart from './MacroPieChart/MacroPieChart.component';
 
-//TODO: Logic to submit form
 // TODO: Make this component pc responsive
 
 const MacrosForm = (props) => {
@@ -159,7 +159,7 @@ const MacrosForm = (props) => {
                     </MacrosPageInputContainer>
                 </MacrosPageNutrientsContainer>
                 <MacroPieChart values={state} />
-                <button>submit</button>
+                <MacroFormSubmitButton>submit</MacroFormSubmitButton>
             </MacrosPageStyledForm>
         </MacrosPageFormDiv>
     );

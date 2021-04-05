@@ -2,6 +2,7 @@ import * as actionTypes from '../actionTypes';
 
 const initialState = {
     showSideMenu: false,
+    menuItem: undefined,
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 showSideMenu: !state.showSideMenu,
+            };
+
+        case actionTypes.SET_CLICKED_MENU_ITEM:
+            return {
+                ...state,
+                menuItem: action.item,
             };
         default: {
             return {

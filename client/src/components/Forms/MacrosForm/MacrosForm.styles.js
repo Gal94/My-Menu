@@ -5,7 +5,8 @@ export const MacrosPageFormDiv = Styled.div`
 `;
 
 export const MacrosPageStyledForm = Styled.form`
-
+    width: 18rem;
+    margin: auto;
 `;
 
 export const MacrosPageInputContainer = Styled.div`
@@ -35,4 +36,26 @@ export const MacrosPageLabel = Styled.label`
     text-align: center;
     display: flex;
     justify-content: center;
+`;
+
+export const MacroFormSubmitButton = Styled.button`
+    display: block;
+    margin: 0 auto;
+    padding: 8px 64px;
+    border-radius: 20px;
+    border: 1px solid #36BF4A;
+    background-color: #36BF4A;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    outline: none;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+
+    &:active {
+        transform: scale(0.95);
+    }
 `;

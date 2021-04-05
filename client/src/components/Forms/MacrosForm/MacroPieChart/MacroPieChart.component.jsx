@@ -14,17 +14,17 @@ const MacroPieChart = (props) => {
         {
             title: 'Proteins',
             value: props.values.proteins === 0 ? 1 : props.values.proteins,
-            color: '#E38627',
+            color: '#FF6961',
         },
         {
             title: 'Carbs',
             value: props.values.carbs === 0 ? 1 : props.values.carbs,
-            color: '#C13C37',
+            color: '#77D077',
         },
         {
             title: 'Fats',
             value: props.values.fats === 0 ? 1 : props.values.fats,
-            color: '#6A2135',
+            color: '#6CA0DC',
         },
     ];
 
@@ -63,7 +63,7 @@ const MacroPieChart = (props) => {
                             display: 'inline-block',
                             width: '14px',
                             height: '14px',
-                            backgroundColor: '#C13C37',
+                            backgroundColor: '#77D077',
                         }}
                     />
                     <MacroPieChartText>Carbs</MacroPieChartText>
@@ -74,7 +74,7 @@ const MacroPieChart = (props) => {
                             display: 'inline-block',
                             width: '14px',
                             height: '14px',
-                            backgroundColor: '#E38627',
+                            backgroundColor: '#FF6961',
                         }}
                     />
                     <MacroPieChartText>Proteins</MacroPieChartText>
@@ -85,7 +85,7 @@ const MacroPieChart = (props) => {
                             display: 'inline-block',
                             width: '14px',
                             height: '14px',
-                            backgroundColor: '#6A2135',
+                            backgroundColor: '#6CA0DC',
                         }}
                     />
                     <MacroPieChartText>Fats</MacroPieChartText>
