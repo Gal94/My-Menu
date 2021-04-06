@@ -11,29 +11,35 @@ export const LineBreak = Styled.hr`
 const isVisible = (props) => {
     if (props.isVisible) {
         return css`
-            display: initial;
+            visibility: visible;
+            transform: translateY(0);
         `;
     } else {
         return css`
-            display: none;
+            visibility: hidden;
         `;
     }
 };
 
 export const MenuItemCompWrapper = Styled.div`
-    ${isVisible}
     position: absolute;
     background-color: #f0f0f0;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 90vw;
+    height: 110%;
+    max-height: fit-content;
     z-index: 10;
     border-radius: .3rem;
+    transform: translateY(-110%);
+    ${isVisible}
+
+    transition: transform 1s;
 `;
 
 export const MenuItemInnerDiv = Styled.div`
-    padding: 16px;
+    width: 80%;
+    margin: 0 auto;
 `;
 
 export const MenuItemCloseDiv = Styled.div`
@@ -41,7 +47,7 @@ export const MenuItemCloseDiv = Styled.div`
 `;
 
 export const MenuItemCloseButton = Styled.span`
-
+    cursor: pointer;
 `;
 
 export const MenuItemTitleDiv = Styled.div`
@@ -62,4 +68,27 @@ export const MenuItemTitleSize = Styled.p`
 
 export const MenuItemPieChart = Styled.div`
 
+`;
+
+export const MenuItemFactsContainer = Styled.div`
+
+`;
+
+export const MenuItemFactBold = Styled.div`
+    display: flex;
+    font-size: 12px;
+    justify-content: space-between;
+    padding: 0 12px;
+`;
+
+export const MenuItemFact = Styled.div`
+    display: flex;
+    font-size: 12px;
+    justify-content: space-between;
+    padding: 0 12px 0 20px;
+    color: #808080;
+`;
+
+export const MenuItemText = Styled.p`
+    margin: 4px;
 `;

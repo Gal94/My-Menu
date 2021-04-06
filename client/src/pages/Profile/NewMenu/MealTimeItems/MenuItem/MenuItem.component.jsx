@@ -13,6 +13,10 @@ import {
     MenuItemTitleSize,
     MenuItemPieChart,
     LineBreak,
+    MenuItemFactsContainer,
+    MenuItemFactBold,
+    MenuItemFact,
+    MenuItemText,
 } from './MenuItem.styles';
 import MenuPieChart from '../../../../../components/MenuPieChart/MenuPieChart.component';
 import DailyValues from '../../../../../components/DailyValues/DailyValues.component';
@@ -37,6 +41,7 @@ const MenuItem = (props) => {
                         </MenuItemTitleSize>
                     </MenuItemTitleDiv>
                     <LineBreak />
+                    {/* Pie chart for current menu item with its serving size */}
                     <MenuItemPieChart>
                         <MenuPieChart {...item} />
                     </MenuItemPieChart>
@@ -45,6 +50,63 @@ const MenuItem = (props) => {
                     <DailyValues item={item} />
                     <LineBreak />
                     {/* Nutrition Facts */}
+                    <MenuItemFactsContainer>
+                        <MenuItemFactBold>
+                            <MenuItemText>Calories</MenuItemText>
+                            <MenuItemText>{item.calories}</MenuItemText>
+                        </MenuItemFactBold>
+                        <LineBreak />
+                        <MenuItemFactBold>
+                            <MenuItemText>Total Carbohydrates</MenuItemText>
+                            <MenuItemText>
+                                {item.carbohydrates_total_g} g
+                            </MenuItemText>
+                        </MenuItemFactBold>
+                        <LineBreak />
+                        <MenuItemFact>
+                            <MenuItemText>Fiber</MenuItemText>
+                            <MenuItemText>{item.fiber_g} g</MenuItemText>
+                        </MenuItemFact>
+                        <LineBreak />
+                        <MenuItemFact>
+                            <MenuItemText>Sugar</MenuItemText>
+                            <MenuItemText>{item.sugar_g} g</MenuItemText>
+                        </MenuItemFact>
+                        <LineBreak />
+                        <MenuItemFactBold>
+                            <MenuItemText>Total Fats</MenuItemText>
+                            <MenuItemText>{item.fat_total_g} g</MenuItemText>
+                        </MenuItemFactBold>
+                        <LineBreak />
+                        <MenuItemFact>
+                            <MenuItemText>Saturated</MenuItemText>
+                            <MenuItemText>
+                                {item.fat_saturated_g} g
+                            </MenuItemText>
+                        </MenuItemFact>
+                        <LineBreak />
+                        <MenuItemFactBold>
+                            <MenuItemText>Protein</MenuItemText>
+                            <MenuItemText>{item.protein_g} g</MenuItemText>
+                        </MenuItemFactBold>
+                        <LineBreak />
+                        <MenuItemFactBold>
+                            <MenuItemText>Sodium</MenuItemText>
+                            <MenuItemText>{item.sodium_mg} mg</MenuItemText>
+                        </MenuItemFactBold>
+                        <LineBreak />
+                        <MenuItemFactBold>
+                            <MenuItemText>Cholesterol</MenuItemText>
+                            <MenuItemText>
+                                {item.cholesterol_mg} mg
+                            </MenuItemText>
+                        </MenuItemFactBold>
+                        <LineBreak />
+                        <MenuItemFactBold>
+                            <MenuItemText>Potassium</MenuItemText>
+                            <MenuItemText>{item.potassium_mg} mg</MenuItemText>
+                        </MenuItemFactBold>
+                    </MenuItemFactsContainer>
                 </MenuItemInnerDiv>
             )}
         </MenuItemCompWrapper>

@@ -15,6 +15,7 @@ import {
 // Progress Bar component
 const DailyValues = (props) => {
     const { item, macros } = props;
+    const [error, setError] = useState(undefined);
     const [values, setValues] = useState({
         calories: 0,
         carbs: 0,
@@ -22,9 +23,18 @@ const DailyValues = (props) => {
         protein: 0,
     });
 
-    console.log(values);
-
     useEffect(() => {
+        // Check if macros are 0
+        if (
+            macros.calories === 0 ||
+            macros.proteins === 0 ||
+            macros.fats === 0 ||
+            macros.carbs === 0
+        ) {
+            return setError('Please set up your daily macros first');
+        }
+
+        setError(undefined);
         setValues({
             calories: Math.round((item.calories / macros.calories) * 100),
             carbs: Math.round(
@@ -34,32 +44,42 @@ const DailyValues = (props) => {
             fats: Math.round((item.fat_total_g / macros.fats) * 100),
         });
     }, [item, macros]);
-
     return (
         <DailyValuesWrapper>
             <DailyValuesTitle>Percent of Daily Values</DailyValuesTitle>
-            <DailyValuesProgressBarContainer>
-                <DailyValueContainer>
-                    <ProgressBar value={values.calories} bgColor='orange' />
-                    <DailyValuePercent>{values.calories}%</DailyValuePercent>
-                    <DailyValueMacroName>Calories</DailyValueMacroName>
-                </DailyValueContainer>
-                <DailyValueContainer>
-                    <ProgressBar value={values.carbs} bgColor='#329C13' />
-                    <DailyValuePercent>{values.carbs}%</DailyValuePercent>
-                    <DailyValueMacroName>Carbs</DailyValueMacroName>
-                </DailyValueContainer>
-                <DailyValueContainer>
-                    <ProgressBar value={values.fats} bgColor='#E81005' />
-                    <DailyValuePercent>{values.fats}%</DailyValuePercent>
-                    <DailyValueMacroName>Fat</DailyValueMacroName>
-                </DailyValueContainer>
-                <DailyValueContainer>
-                    <ProgressBar value={values.proteins} bgColor='#9633E8' />
-                    <DailyValuePercent>{values.proteins}%</DailyValuePercent>
-                    <DailyValueMacroName>Proteins</DailyValueMacroName>
-                </DailyValueContainer>
-            </DailyValuesProgressBarContainer>
+            {!error ? (
+                <DailyValuesProgressBarContainer>
+                    <DailyValueContainer>
+                        <ProgressBar value={values.calories} bgColor='orange' />
+                        <DailyValuePercent>
+                            {values.calories}%
+                        </DailyValuePercent>
+                        <DailyValueMacroName>Calories</DailyValueMacroName>
+                    </DailyValueContainer>
+                    <DailyValueContainer>
+                        <ProgressBar value={values.carbs} bgColor='#329C13' />
+                        <DailyValuePercent>{values.carbs}%</DailyValuePercent>
+                        <DailyValueMacroName>Carbs</DailyValueMacroName>
+                    </DailyValueContainer>
+                    <DailyValueContainer>
+                        <ProgressBar value={values.fats} bgColor='#E81005' />
+                        <DailyValuePercent>{values.fats}%</DailyValuePercent>
+                        <DailyValueMacroName>Fat</DailyValueMacroName>
+                    </DailyValueContainer>
+                    <DailyValueContainer>
+                        <ProgressBar
+                            value={values.proteins}
+                            bgColor='#9633E8'
+                        />
+                        <DailyValuePercent>
+                            {values.proteins}%
+                        </DailyValuePercent>
+                        <DailyValueMacroName>Proteins</DailyValueMacroName>
+                    </DailyValueContainer>
+                </DailyValuesProgressBarContainer>
+            ) : (
+                <p style={{ fontSize: '14px' }}>{error}</p>
+            )}
         </DailyValuesWrapper>
     );
 };

@@ -32,7 +32,6 @@ const MenuPieChart = (props) => {
             color: '#E81005',
         },
     ];
-    console.log(data);
 
     const calculatePercentage = (amount) =>
         Math.round((amount / (carbs + proteins + fats)) * 100);

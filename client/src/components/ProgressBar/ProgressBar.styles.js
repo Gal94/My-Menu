@@ -8,7 +8,6 @@ const width = (props) => {
 };
 
 const bgColor = (props) => {
-    console.log(props);
     if (props.bgColor) {
         return props.bgColor;
     }
