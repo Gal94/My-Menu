@@ -3,13 +3,14 @@ import Styled, { css } from 'styled-components';
 export const MealTimeComponentWrapper = Styled.div`
     margin: 0 0 24px;
     width: 100%;
+    position: relative;
     overflow: hidden;
 `;
 
 export const MealTimeItemsWrapper = Styled.div`
     font-size: 16px;
     margin: 0;
-    padding: 18px 12px;
+
     text-align: left;
     outline: none;
     border: none;
@@ -18,14 +19,15 @@ export const MealTimeItemsWrapper = Styled.div`
     position: relative;
     transition: 0.4s;
     color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-    &:hover {
-        background-color: #c6c6c6;
-    }
 `;
 
 export const MealTimeTitle = Styled.h1`
     margin: 0;
+    padding: 18px 20px;
     font-size: 20px
 `;
 

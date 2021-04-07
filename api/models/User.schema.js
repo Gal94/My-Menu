@@ -32,12 +32,11 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-    menus: [
-        {
-            type: mongoose.Types.ObjectId,
-            ref: 'Menu',
-        },
-    ],
+    menus: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Menu',
+    },
+
     weights: [
         {
             type: mongoose.Types.ObjectId,

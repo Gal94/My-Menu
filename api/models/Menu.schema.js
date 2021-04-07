@@ -20,10 +20,10 @@ const menuSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-    morning: [{}],
+    breakfast: [{}],
     lunch: [{}],
     dinner: [{}],
-    snacks:[{}],
+    snacks: [{}],
     totalSugars: {
         default: 0,
         type: Number,

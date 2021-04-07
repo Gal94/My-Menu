@@ -2,7 +2,8 @@ import * as actionTypes from '../actionTypes';
 
 const initialState = {
     showSideMenu: false,
-    menuItem: undefined,
+    menuItem: null,
+    mealTimeNewItem: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -17,6 +18,16 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 menuItem: action.item,
+            };
+        case actionTypes.MEAL_TIME_NEW_ITEM:
+            return {
+                ...state,
+                mealTimeNewItem: action.time,
+            };
+        case actionTypes.MEAL_TIME_NEW_ITEM_RESET:
+            return {
+                ...state,
+                mealTimeNewItem: null,
             };
         default: {
             return {

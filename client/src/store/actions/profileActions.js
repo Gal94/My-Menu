@@ -7,3 +7,7 @@ export const updateUserInfo = (userInfo) => {
 export const updateUserMacros = (userMacros) => {
     return { type: actionTypes.UPDATE_USER_MACROS, macros: userMacros };
 };
+
+export const updateMenu = (menu) => {
+    return { type: actionTypes.UPDATE_MENU, menu: menu };
+};

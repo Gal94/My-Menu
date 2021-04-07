@@ -3,13 +3,19 @@ import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { updateUserMacros } from '../../../store/actions/profileActions';
+import {
+    updateMenu,
+    updateUserMacros,
+} from '../../../store/actions/profileActions';
 import { NewMenuTitle, NewMenuWrapper } from './NewMenu.styles';
 import MealTimeItems from './MealTimeItems/MealTimeItems.component';
 import MenuItem from './MealTimeItems/MenuItem/MenuItem.component';
+import NewMenuItem from '../../../components/Forms/NewMenuItem/NewMenuItem.component';
+import { addToMenu, removeFromMenu } from '../../../helpers/menuHelpers';
 
 // Get the macros
 const NewMenu = (props) => {
+    // needed for inner component
     const [myMacros, setMyMacros] = useState({
         calories: 0,
         fats: 0,
@@ -17,87 +23,16 @@ const NewMenu = (props) => {
         carbs: 0,
     });
 
-    const [menu, setMenu] = useState({
-        menuName: 'New Menu',
-        morning: [
-            {
-                sugar_g: 13.3,
-                fiber_g: 4,
-                serving_size_g: 283.495,
-                sodium_mg: 8,
-                name: 'onion',
-                potassium_mg: 99,
-                fat_saturated_g: 0.1,
-                fat_total_g: 0.5,
-                calories: 126.7,
-                cholesterol_mg: 0,
-                protein_g: 3.9,
-                carbohydrates_total_g: 28.6,
-            },
-            {
-                sugar_g: 2.6,
-                fiber_g: 1.2,
-                serving_size_g: 100,
-                sodium_mg: 4,
-                name: 'tomato',
-                potassium_mg: 23,
-                fat_saturated_g: 0,
-                fat_total_g: 0.2,
-                calories: 18.2,
-                cholesterol_mg: 0,
-                protein_g: 0.9,
-                carbohydrates_total_g: 3.9,
-            },
-        ],
-        lunch: [],
-        dinner: [],
-        snacks: [],
-        totalSugars: 0,
-        totalSodium: 0,
-        totalPotassium: 0,
-        totalSaturatedFat: 0,
-        totalCalories: 0,
-        totalCholesterol: 0,
-        totalProtein: 0,
-        totalCarbs: 0,
-    });
-
     // adds an item to a menu based on the meal time
-    const addMenuItem = (mealTime, item) => {
-        const newMenu = { ...menu };
-        newMenu[mealTime] = newMenu[mealTime].push(item);
-
-        // add ingredient values to total
-        newMenu.totalSugars += item.sugar_g;
-        newMenu.totalSodium += item.sodium_mg;
-        newMenu.totalPotassium += item.potassium_mg;
-        newMenu.totalSaturatedFat += item.fat_saturated_g;
-        newMenu.totalCalories += item.calories;
-        newMenu.totalCholesterol += item.cholesterol_mg;
-        newMenu.totalProtein += item.protein_g;
-        newMenu.totalCarbs += item.carbohydrates_total_g;
-
-        setMenu(newMenu);
-    };
+    // const addMenuItem = (mealTime, item) => {
+    //     const newMenu = addToMenu(props.menu, mealTime, item);
+    //     props.onUpdateMenu(newMenu);
+    // };
 
     // removes an item from the menu and reduces the total value
     const removeMenuItem = (mealTime, item) => {
-        const newMenu = { ...menu };
-        newMenu[mealTime] = newMenu[mealTime].filter((mealTimeItem) => {
-            return mealTimeItem.name.toLowerCase() !== item.name.toLowerCase();
-        });
-
-        // add ingredient values to total
-        newMenu.totalSugars -= item.sugar_g;
-        newMenu.totalSodium -= item.sodium_mg;
-        newMenu.totalPotassium -= item.potassium_mg;
-        newMenu.totalSaturatedFat -= item.fat_saturated_g;
-        newMenu.totalCalories -= item.calories;
-        newMenu.totalCholesterol -= item.cholesterol_mg;
-        newMenu.totalProtein -= item.protein_g;
-        newMenu.totalCarbs -= item.carbohydrates_total_g;
-
-        setMenu(newMenu);
+        const newMenu = removeFromMenu(props.menu, mealTime, item);
+        props.onUpdateMenu(newMenu);
     };
 
     const getUserMacros = async () => {
@@ -151,27 +86,23 @@ const NewMenu = (props) => {
             <MenuItem />
             <MealTimeItems
                 time='Breakfast'
-                onAddItem={(item) => addMenuItem('morning', item)}
-                onRemoveItem={(item) => removeMenuItem('morning', item)}
-                items={menu.morning}
+                onRemoveItem={(item) => removeMenuItem('breakfast', item)}
+                items={props.menu.breakfast}
             />
             <MealTimeItems
                 time='Lunch'
-                onAddItem={(item) => addMenuItem('lunch', item)}
                 onRemoveItem={(item) => removeMenuItem('lunch', item)}
-                items={menu.lunch}
+                items={props.menu.lunch}
             />
             <MealTimeItems
                 time='Dinner'
-                onAddItem={(item) => addMenuItem('dinner', item)}
                 onRemoveItem={(item) => removeMenuItem('dinner', item)}
-                items={menu.dinner}
+                items={props.menu.dinner}
             />
             <MealTimeItems
                 time='Snacks'
-                onAddItem={(item) => addMenuItem('snacks', item)}
                 onRemoveItem={(item) => removeMenuItem('snacks', item)}
-                items={menu.snacks}
+                items={props.menu.snacks}
             />
         </NewMenuWrapper>
     );
@@ -179,18 +110,22 @@ const NewMenu = (props) => {
 
 NewMenu.propTypes = {
     macros: PropTypes.object,
+    menu: PropTypes.object.isRequired,
     onUpdateMacros: PropTypes.func.isRequired,
+    onUpdateMenu: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
     return {
         macros: state.profile.macros,
+        menu: state.profile.menu,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onUpdateMacros: (userMacros) => dispatch(updateUserMacros(userMacros)),
+        onUpdateMenu: (newMenu) => dispatch(updateMenu(newMenu)),
     };
 };
 

@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setMenuItem } from '../../../../store/actions/UiActions';
+import {
+    mealTimeNewItem,
+    setMenuItem,
+} from '../../../../store/actions/UiActions';
 
 import {
     MealTimeItemsWrapper,
@@ -12,11 +15,19 @@ import {
 } from './MealTimeItems.styles';
 
 const MealTimeItems = (props) => {
+    // Open a search bar upon clicking +
+
     return (
         <MealTimeComponentWrapper>
             <MealTimeItemsWrapper>
                 {/* TODO: add span with + icon */}
                 <MealTimeTitle>{props.time}</MealTimeTitle>
+                <MealTimeTitle
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => props.onNewItem(props.time.toLowerCase())}
+                >
+                    +
+                </MealTimeTitle>
             </MealTimeItemsWrapper>
             <MenuItemsContainer>
                 <MenuTimeItem>
@@ -28,7 +39,7 @@ const MealTimeItems = (props) => {
                         Calories
                     </MenuItemCategory>
                 </MenuTimeItem>
-                {/* TODO: create a modal for each item to display all data, can use pie chart */}
+                {/* Render all menu items */}
                 {props.items.map((item, index) => {
                     return (
                         <MenuTimeItem
@@ -53,14 +64,15 @@ const MealTimeItems = (props) => {
 MealTimeItems.propTypes = {
     time: PropTypes.string.isRequired,
     onSetMenuItem: PropTypes.func.isRequired,
-    onAddItem: PropTypes.func.isRequired,
     onRemoveItem: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired,
+    onNewItem: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onSetMenuItem: (item) => dispatch(setMenuItem(item)),
+        onNewItem: (time) => dispatch(mealTimeNewItem(time)),
     };
 };
 
