@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import User from '../models/User.schema.js';
+import Menu from '../models/Menu.schema.js';
 import HttpError from '../util/httpError.js';
 
 // TODO : express validator on input fields
@@ -20,11 +21,15 @@ export const postRegister = async (req, res, next) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create the user
-        const user = new User({
+        let user = new User({
             ...req.body,
             password: hashedPassword,
         });
 
+        const menu = new Menu({ menuCreator: user._id });
+        user['menu'] =  menu._id ;
+
+        await menu.save();
         await user.save();
         return res.status(200).json({
             message: 'Signed up successfully',

@@ -1,6 +1,12 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.schema.js';
 
+/** 
+* * RETURNS:
+* *      req.isAuth = user._id | false (if jwt cannot be verified)
+* ?      req.user = the logged in user mongoose object (if jwt is verified)
+*/
+
 export const isAuthenticated = async (req, res, next) => {
     const authHeader = req.get('Authorization');
     // Not Authorized

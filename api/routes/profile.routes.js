@@ -10,8 +10,10 @@ import { body } from 'express-validator';
 
 import {
     getMacros,
+    getMenu,
     getProfileInfo,
     putMacros,
+    putMenu,
     putProfileInfo,
 } from '../controllers/profile.controller.js';
 import { isAuthenticated } from '../middlewares/isAuthenticated.js';
@@ -30,5 +32,9 @@ profileRouter.put(
 );
 profileRouter.get('/macros', isAuthenticated, getMacros);
 
-//calories, fats, carbs, proteins
+//calories, fats, carbs, proteins - validator
 profileRouter.put('/macros', isAuthenticated, putMacros);
+
+profileRouter.get('/menu', isAuthenticated, getMenu);
+
+profileRouter.put('/menu', isAuthenticated, putMenu);

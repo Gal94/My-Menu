@@ -11,3 +11,8 @@ export const updateUserMacros = (userMacros) => {
 export const updateMenu = (menu) => {
     return { type: actionTypes.UPDATE_MENU, menu: menu };
 };
+
+// Make an action that will save the new menu in the db
+export const SaveMenuToDB = (updatedMenu) => {
+    return async (dispatch) => {};
+};

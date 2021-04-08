@@ -26,13 +26,13 @@ const userSchema = new Schema({
     age: {
         required: false,
         type: Number,
-        default: '',
+        default: undefined,
     },
     joined: {
         type: Date,
         default: Date.now,
     },
-    menus: {
+    menu: {
         type: mongoose.Types.ObjectId,
         ref: 'Menu',
     },

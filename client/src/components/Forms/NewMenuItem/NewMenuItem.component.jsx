@@ -14,7 +14,7 @@ import {
     NewMenuItemWrapper,
 } from './NewMenuItem.styles';
 import { resetMealTimeNewItem } from '../../../store/actions/UiActions';
-import { fetchItems } from '../../../helpers/ApiCalls';
+import { fetchItems, saveMenu } from '../../../helpers/ApiCalls';
 import { addToMenu } from '../../../helpers/menuHelpers';
 import { updateMenu } from '../../../store/actions/profileActions';
 
@@ -34,7 +34,9 @@ const NewMenuItem = (props) => {
             return toast.error('Please search for 1 product at a time');
         }
         const newMenu = addToMenu(props.menu, props.time, items[0]);
+        // save to db
         props.onUpdateMenu(newMenu);
+        saveMenu(newMenu);
         dismountModal();
     };
 

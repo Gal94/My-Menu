@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -10,8 +10,7 @@ import {
 import { NewMenuTitle, NewMenuWrapper } from './NewMenu.styles';
 import MealTimeItems from './MealTimeItems/MealTimeItems.component';
 import MenuItem from './MealTimeItems/MenuItem/MenuItem.component';
-import NewMenuItem from '../../../components/Forms/NewMenuItem/NewMenuItem.component';
-import { addToMenu, removeFromMenu } from '../../../helpers/menuHelpers';
+import { removeFromMenu } from '../../../helpers/menuHelpers';
 
 // Get the macros
 const NewMenu = (props) => {
@@ -22,12 +21,6 @@ const NewMenu = (props) => {
         proteins: 0,
         carbs: 0,
     });
-
-    // adds an item to a menu based on the meal time
-    // const addMenuItem = (mealTime, item) => {
-    //     const newMenu = addToMenu(props.menu, mealTime, item);
-    //     props.onUpdateMenu(newMenu);
-    // };
 
     // removes an item from the menu and reduces the total value
     const removeMenuItem = (mealTime, item) => {
@@ -52,7 +45,7 @@ const NewMenu = (props) => {
 
             if (response.status >= 400) {
                 console.log(data);
-                toast.error(data.message);
+                return toast.error(data.message);
             }
             setMyMacros({
                 calories: data.goal.calories,
@@ -66,8 +59,35 @@ const NewMenu = (props) => {
         }
     };
 
+    const getUserMenu = async () => {
+        try {
+            const response = await fetch(
+                `http://localhost:5000/api/profile/menu`,
+                {
+                    method: 'GET',
+                    headers: {
+                        Authorization:
+                            'Bearer ' + localStorage.getItem('MyMenuToken'),
+                    },
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.status >= 400) {
+                console.log(data);
+                return toast.error(data.message);
+            }
+
+            props.onUpdateMenu(data.menu[0]);
+        } catch (error) {
+            console.log(error);
+            toast.error('Failed to fetch menu, please try again later.');
+        }
+    };
+
     useEffect(() => {
-        // check if the macros object is empty (never fetched macros)
+        // * check if the macros object is empty (never fetched macros)
         if (Object.keys(props.macros).length === 0) {
             getUserMacros();
         } else {
@@ -78,32 +98,39 @@ const NewMenu = (props) => {
                 carbs: props.macros.carbs,
             });
         }
+
+        // * check if the user's menu wasn't fetched already
+        if (!props.menu.createdAt) {
+            getUserMenu();
+        }
     }, []);
 
     return (
         <NewMenuWrapper>
             <NewMenuTitle>My New Menu</NewMenuTitle>
-            <MenuItem />
-            <MealTimeItems
-                time='Breakfast'
-                onRemoveItem={(item) => removeMenuItem('breakfast', item)}
-                items={props.menu.breakfast}
-            />
-            <MealTimeItems
-                time='Lunch'
-                onRemoveItem={(item) => removeMenuItem('lunch', item)}
-                items={props.menu.lunch}
-            />
-            <MealTimeItems
-                time='Dinner'
-                onRemoveItem={(item) => removeMenuItem('dinner', item)}
-                items={props.menu.dinner}
-            />
-            <MealTimeItems
-                time='Snacks'
-                onRemoveItem={(item) => removeMenuItem('snacks', item)}
-                items={props.menu.snacks}
-            />
+                <MenuItem />
+                <MealTimeItems
+                    time='Breakfast'
+                    onRemoveItem={(item) =>
+                        removeMenuItem('breakfast', item)
+                    }
+                    items={props.menu.breakfast}
+                />
+                <MealTimeItems
+                    time='Lunch'
+                    onRemoveItem={(item) => removeMenuItem('lunch', item)}
+                    items={props.menu.lunch}
+                />
+                <MealTimeItems
+                    time='Dinner'
+                    onRemoveItem={(item) => removeMenuItem('dinner', item)}
+                    items={props.menu.dinner}
+                />
+                <MealTimeItems
+                    time='Snacks'
+                    onRemoveItem={(item) => removeMenuItem('snacks', item)}
+                    items={props.menu.snacks}
+                />
         </NewMenuWrapper>
     );
 };

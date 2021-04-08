@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
 
 const menuSchema = new Schema({
     menuName: {
-        required: 'Menu Name field is required',
+        default: 'My Menu',
         type: String,
     },
     menuCreator: {
