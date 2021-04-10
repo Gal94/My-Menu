@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 import { setMenuItem } from '../../../../../store/actions/UiActions';
 import capitalize from '../../../../../helpers/capitalizeFirstLetter';
@@ -32,11 +33,15 @@ import { saveMenu } from '../../../../../helpers/ApiCalls';
 const MenuItem = (props) => {
     const { item, mealTime, menu } = props;
 
-    const removeMenuItem = () => {
+    const removeMenuItem = async () => {
         const newMenu = removeFromMenu(menu, mealTime, item);
-        // TODO: validate that menu was changed before updating store
-        saveMenu(newMenu);
-        props.onUpdateMenu(newMenu);
+
+        // * Changes store only if changes were made to the database successfully
+        if (await saveMenu(newMenu)) {
+            return props.onUpdateMenu(newMenu);
+        }
+
+        toast.error('Failed to save changes, please try again.');
     };
 
     return (

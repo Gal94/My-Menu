@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -9,7 +9,6 @@ import {
 } from '../../../store/actions/profileActions';
 import { NewMenuTitle, NewMenuWrapper } from './NewMenu.styles';
 import MealTimeItems from './MealTimeItems/MealTimeItems.component';
-import MenuItem from './MealTimeItems/MenuItem/MenuItem.component';
 
 // Get the macros
 const NewMenu = (props) => {
@@ -97,6 +96,7 @@ const NewMenu = (props) => {
             getUserMenu();
         }
     }, []);
+
 
     return (
         <NewMenuWrapper>

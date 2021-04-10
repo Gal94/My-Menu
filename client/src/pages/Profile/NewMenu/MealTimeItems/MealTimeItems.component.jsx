@@ -22,6 +22,8 @@ const MealTimeItems = (props) => {
         props.onSetMenuItem(clickedItem, props.time.toLowerCase());
     };
 
+    const items = props.menu[props.time.toLowerCase()] || [];
+
     return (
         <MealTimeComponentWrapper>
             <MealTimeItemsWrapper>
@@ -44,7 +46,7 @@ const MealTimeItems = (props) => {
                     </MenuItemCategory>
                 </MenuTimeItem>
                 {/* Render all menu items */}
-                {props.items.map((item, index) => {
+                {items.map((item, index) => {
                     return (
                         <MenuTimeItem
                             key={index}
@@ -68,7 +70,7 @@ const MealTimeItems = (props) => {
 MealTimeItems.propTypes = {
     time: PropTypes.string.isRequired,
     onSetMenuItem: PropTypes.func.isRequired,
-    items: PropTypes.array.isRequired,
+    menu: PropTypes.object.isRequired,
     onNewItem: PropTypes.func.isRequired,
 };
 
@@ -85,4 +87,10 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(MealTimeItems);
+const mapStateToProps = (state) => {
+    return {
+        menu: state.profile.menu,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MealTimeItems);
