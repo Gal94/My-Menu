@@ -16,6 +16,7 @@ import ProfileInfo from './ProfileInfo/ProfileInfo.component';
 import MacrosPage from './MacrosPage/MacrosPage.component';
 import NewMenu from './NewMenu/NewMenu.component';
 import NewMenuItem from '../../components/Forms/NewMenuItem/NewMenuItem.component';
+import MenuItem from './NewMenu/MealTimeItems/MenuItem/MenuItem.component';
 
 // check if a user is authenticated
 
@@ -51,6 +52,7 @@ const Profile = (props) => {
                     </Route>
                     <Route path='/profile/new-menu' exact>
                         <NewMenu />
+                        <MenuItem />
                         <NewMenuItem />
                     </Route>
                     <Route path='/profile/macros/' exact>

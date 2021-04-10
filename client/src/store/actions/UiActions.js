@@ -23,3 +23,9 @@ export const resetMealTimeNewItem = () => {
         type: actionTypes.MEAL_TIME_NEW_ITEM_RESET,
     };
 };
+
+export const toggleItemForm = () => {
+    return {
+        type: actionTypes.TOGGLE_NEW_ITEM_FORM
+    }
+}

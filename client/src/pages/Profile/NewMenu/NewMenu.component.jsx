@@ -10,7 +10,6 @@ import {
 import { NewMenuTitle, NewMenuWrapper } from './NewMenu.styles';
 import MealTimeItems from './MealTimeItems/MealTimeItems.component';
 import MenuItem from './MealTimeItems/MenuItem/MenuItem.component';
-import { removeFromMenu } from '../../../helpers/menuHelpers';
 
 // Get the macros
 const NewMenu = (props) => {
@@ -21,12 +20,6 @@ const NewMenu = (props) => {
         proteins: 0,
         carbs: 0,
     });
-
-    // removes an item from the menu and reduces the total value
-    const removeMenuItem = (mealTime, item) => {
-        const newMenu = removeFromMenu(props.menu, mealTime, item);
-        props.onUpdateMenu(newMenu);
-    };
 
     const getUserMacros = async () => {
         try {
@@ -108,29 +101,10 @@ const NewMenu = (props) => {
     return (
         <NewMenuWrapper>
             <NewMenuTitle>My New Menu</NewMenuTitle>
-                <MenuItem />
-                <MealTimeItems
-                    time='Breakfast'
-                    onRemoveItem={(item) =>
-                        removeMenuItem('breakfast', item)
-                    }
-                    items={props.menu.breakfast}
-                />
-                <MealTimeItems
-                    time='Lunch'
-                    onRemoveItem={(item) => removeMenuItem('lunch', item)}
-                    items={props.menu.lunch}
-                />
-                <MealTimeItems
-                    time='Dinner'
-                    onRemoveItem={(item) => removeMenuItem('dinner', item)}
-                    items={props.menu.dinner}
-                />
-                <MealTimeItems
-                    time='Snacks'
-                    onRemoveItem={(item) => removeMenuItem('snacks', item)}
-                    items={props.menu.snacks}
-                />
+            <MealTimeItems time='Breakfast' items={props.menu.breakfast} />
+            <MealTimeItems time='Lunch' items={props.menu.lunch} />
+            <MealTimeItems time='Dinner' items={props.menu.dinner} />
+            <MealTimeItems time='Snacks' items={props.menu.snacks} />
         </NewMenuWrapper>
     );
 };

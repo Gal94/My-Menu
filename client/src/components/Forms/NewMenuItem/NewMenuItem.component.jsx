@@ -13,11 +13,15 @@ import {
     NewMenuItemTitle,
     NewMenuItemWrapper,
 } from './NewMenuItem.styles';
-import { resetMealTimeNewItem } from '../../../store/actions/UiActions';
+import {
+    resetMealTimeNewItem,
+    toggleItemForm,
+} from '../../../store/actions/UiActions';
 import { fetchItems, saveMenu } from '../../../helpers/ApiCalls';
 import { addToMenu } from '../../../helpers/menuHelpers';
 import { updateMenu } from '../../../store/actions/profileActions';
 
+// * New Menu Item Form
 const NewMenuItem = (props) => {
     const [newItem, setNewItem] = useState('');
 
@@ -34,14 +38,17 @@ const NewMenuItem = (props) => {
             return toast.error('Please search for 1 product at a time');
         }
         const newMenu = addToMenu(props.menu, props.time, items[0]);
-        // save to db
-        props.onUpdateMenu(newMenu);
+
+        // TODO: validate that changes saved to db before updating the store
         saveMenu(newMenu);
+        props.onUpdateMenu(newMenu);
         dismountModal();
     };
 
     return (
-        <NewMenuItemWrapper isVisible={props.time ? true : false}>
+        <NewMenuItemWrapper
+            isVisible={props.time && props.showForm ? true : false}
+        >
             <NewMenuItemModalBG onClick={dismountModal}></NewMenuItemModalBG>
             <NewMenuItemInnerDiv>
                 <NewMenuItemFormContainer>
@@ -67,7 +74,10 @@ const NewMenuItem = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onCloseModal: () => dispatch(resetMealTimeNewItem()),
+        onCloseModal: () => {
+            dispatch(resetMealTimeNewItem());
+            dispatch(toggleItemForm());
+        },
         onUpdateMenu: (newMenu) => dispatch(updateMenu(newMenu)),
     };
 };
@@ -76,6 +86,7 @@ const mapStateToProps = (state) => {
     return {
         time: state.ui.mealTimeNewItem,
         menu: state.profile.menu,
+        showForm: state.ui.showNewFoodForm,
     };
 };
 

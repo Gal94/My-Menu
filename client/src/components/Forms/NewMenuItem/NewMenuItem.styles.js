@@ -42,7 +42,7 @@ export const NewMenuItemWrapper = Styled.div`
     transform: translateY(-110%);
     ${isVisible}
 
-    transition: transform 1s;
+    transition: transform .6s, visibility 1s;
 `;
 
 export const NewMenuItemInnerDiv = Styled.div`

@@ -24,17 +24,18 @@ const isVisible = (props) => {
 export const MenuItemCompWrapper = Styled.div`
     position: absolute;
     background-color: #f0f0f0;
-    top: 0;
+    top: 6rem;
     left: 0;
-    width: 90vw;
-    height: 110%;
-    max-height: fit-content;
-    z-index: 10;
+    // position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    // z-index: 10;
     border-radius: .3rem;
     transform: translateY(-110%);
     ${isVisible}
+    // visibility: visible;
 
-    transition: transform 1s;
+    transition: transform .6s, visibility 1s;
 `;
 
 export const MenuItemInnerDiv = Styled.div`
@@ -91,4 +92,22 @@ export const MenuItemFact = Styled.div`
 
 export const MenuItemText = Styled.p`
     margin: 4px;
+`;
+
+export const MenuItemHeaderSection = Styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding-top: 16px;
+`;
+
+export const RemoveItemButton = Styled.button`
+    font-size: 12px;
+    background-color: transparent;
+    color: #f7596f;
+    border: 1px solid #f7596f;
+    border-radius: 0.3rem;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 8px;
 `;

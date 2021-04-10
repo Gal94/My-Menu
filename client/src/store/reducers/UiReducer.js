@@ -4,6 +4,7 @@ const initialState = {
     showSideMenu: false,
     menuItem: null,
     mealTimeNewItem: null,
+    showNewFoodForm: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +29,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 mealTimeNewItem: null,
+            };
+        case actionTypes.TOGGLE_NEW_ITEM_FORM:
+            return {
+                ...state,
+                showNewFoodForm: !state.showNewFoodForm,
             };
         default: {
             return {
