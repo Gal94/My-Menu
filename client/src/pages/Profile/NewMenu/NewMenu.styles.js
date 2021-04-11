@@ -8,3 +8,8 @@ export const NewMenuTitle = Styled.h1`
     font-size: 26px;
     margin: 0 0 32px;
 `;
+
+export const NewMenuChartsContainer = Styled.div`
+    display: flex;
+    justify-content: space-around;
+`;

@@ -26,14 +26,11 @@ export const MenuItemCompWrapper = Styled.div`
     background-color: #f0f0f0;
     top: 6rem;
     left: 0;
-    // position: relative;
     width: 100vw;
     min-height: 100vh;
-    // z-index: 10;
     border-radius: .3rem;
     transform: translateY(-110%);
     ${isVisible}
-    // visibility: visible;
 
     transition: transform .6s, visibility 1s;
 `;

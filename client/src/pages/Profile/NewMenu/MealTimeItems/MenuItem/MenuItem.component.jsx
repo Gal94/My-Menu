@@ -161,12 +161,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onClickX: () => dispatch(setMenuItem(undefined)),
+        onClickX: () => dispatch(setMenuItem(null)),
 
         // * Updates menu and closes the component
         onUpdateMenu: (newMenu) => {
             dispatch(updateMenu(newMenu));
-            dispatch(setMenuItem(undefined));
+            dispatch(setMenuItem(null));
         },
     };
 };

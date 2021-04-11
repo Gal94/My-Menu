@@ -60,6 +60,10 @@ const menuSchema = new Schema({
         default: 0,
         type: Number,
     },
+    totalFat: {
+        default: 0,
+        type: Number,
+    },
 });
 
 export default mongoose.model('Menu', menuSchema);

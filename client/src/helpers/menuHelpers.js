@@ -4,6 +4,7 @@ export const addToMenu = (menu, mealTime, item) => {
     };
     newMenu[mealTime].push(item);
     // add ingredient values to total
+    newMenu.totalFat += item.fat_total_g;
     newMenu.totalSugars += item.sugar_g;
     newMenu.totalSodium += item.sodium_mg;
     newMenu.totalPotassium += item.potassium_mg;
@@ -37,6 +38,7 @@ export const removeFromMenu = (menu, mealTime, item) => {
     newMenu[mealTime] = newMenuItems;
 
     // add ingredient values to total
+    newMenu.totalFat -= item.fat_total_g;
     newMenu.totalSugars -= item.sugar_g;
     newMenu.totalSodium -= item.sodium_mg;
     newMenu.totalPotassium -= item.potassium_mg;

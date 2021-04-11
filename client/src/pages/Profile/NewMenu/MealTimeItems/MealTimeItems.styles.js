@@ -14,7 +14,7 @@ export const MealTimeItemsWrapper = Styled.div`
     text-align: left;
     outline: none;
     border: none;
-    background-color: #0EE883;
+    background-color: #8DDB92;
     width: 100%;
     position: relative;
     transition: 0.4s;
@@ -32,7 +32,7 @@ export const MealTimeTitle = Styled.h1`
 `;
 
 export const MenuItemsContainer = Styled.div`
-    background-color: #0EE88332;
+    background-color: #88EBC5;
 `;
 
 export const MenuTimeItem = Styled.div`
@@ -43,7 +43,7 @@ export const MenuTimeItem = Styled.div`
 const isCategory = (props) => {
     if (props.isCategory) {
         return css`
-            background-color: #0ee88366;
+            background-color: #8ddb9280;
             color: #303030;
             font-weight: bold;
             cursor: initial;
@@ -56,5 +56,6 @@ export const MenuItemCategory = Styled.div`
     padding: 6px 4px;
     font-size: 14px;
     text-align: center;
+    color: #353535;
     ${isCategory}
 `;

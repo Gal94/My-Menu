@@ -17,6 +17,7 @@ const initialState = {
         totalCholesterol: 0,
         totalProtein: 0,
         totalCarbs: 0,
+        totalFat: 0,
     },
 };
 

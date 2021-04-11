@@ -31,7 +31,7 @@ export const NewMenuItemModalBG = Styled.div`
 `;
 
 export const NewMenuItemWrapper = Styled.div`
-    position: absolute;
+    position: fixed;
     top: 0rem;
     right: 0;
     width: 100vw;

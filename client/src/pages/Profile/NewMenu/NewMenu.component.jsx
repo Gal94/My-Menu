@@ -7,18 +7,39 @@ import {
     updateMenu,
     updateUserMacros,
 } from '../../../store/actions/profileActions';
-import { NewMenuTitle, NewMenuWrapper } from './NewMenu.styles';
+import {
+    NewMenuChartsContainer,
+    NewMenuTitle,
+    NewMenuWrapper,
+} from './NewMenu.styles';
 import MealTimeItems from './MealTimeItems/MealTimeItems.component';
+import { RoundProgressBar } from './RoundProgressBar/RoundProgressBar.component';
 
-// Get the macros
+// ? The menu display container
 const NewMenu = (props) => {
-    // needed for inner component
-    const [myMacros, setMyMacros] = useState({
-        calories: 0,
-        fats: 0,
-        proteins: 0,
-        carbs: 0,
-    });
+    // * states to be passed to inner components
+    const [myMacros, setMyMacros] = useState([
+        {
+            name: 'Calories',
+            amount: 0,
+            color: '#3e98c7',
+        },
+        {
+            name: 'Carbs',
+            color: '#329C13',
+        },
+        {
+            name: 'Proteins',
+            amount: 0,
+            color: '#9633E8',
+        },
+        {
+            name: 'Fats',
+            amount: 0,
+            color: '#E81005',
+        },
+    ]);
+    const [currentMacros, setCurrentMacros] = useState([0, 0, 0, 0]);
 
     const getUserMacros = async () => {
         try {
@@ -36,17 +57,33 @@ const NewMenu = (props) => {
             const data = await response.json();
 
             if (response.status >= 400) {
-                console.log(data);
                 return toast.error(data.message);
             }
-            setMyMacros({
-                calories: data.goal.calories,
-                fats: data.goal.fats,
-                proteins: data.goal.proteins,
-                carbs: data.goal.carbs,
-            });
+            setMyMacros([
+                {
+                    name: 'Calories',
+                    amount: data.goal.calories,
+                    color: '#3e98c7',
+                },
+                {
+                    name: 'Carbs',
+                    amount: data.goal.carbs,
+                    color: '#329C13',
+                },
+                {
+                    name: 'Proteins',
+                    amount: data.goal.proteins,
+                    color: '#9633E8',
+                },
+                {
+                    name: 'Fats',
+                    amount: data.goal.fats,
+                    color: '#E81005',
+                },
+            ]);
             props.onUpdateMacros(data.goal);
         } catch (err) {
+            console.log(err);
             toast.error('Failed to fetch values');
         }
     };
@@ -71,7 +108,14 @@ const NewMenu = (props) => {
                 return toast.error(data.message);
             }
 
-            props.onUpdateMenu(data.menu[0]);
+            const item = data.menu[0];
+            props.onUpdateMenu(item);
+            setCurrentMacros([
+                item.totalCalories,
+                item.totalCarbs,
+                item.totalProtein,
+                item.totalFat,
+            ]);
         } catch (error) {
             console.log(error);
             toast.error('Failed to fetch menu, please try again later.');
@@ -83,28 +127,74 @@ const NewMenu = (props) => {
         if (Object.keys(props.macros).length === 0) {
             getUserMacros();
         } else {
-            setMyMacros({
-                calories: props.macros.calories,
-                fats: props.macros.fats,
-                proteins: props.macros.proteins,
-                carbs: props.macros.carbs,
-            });
+            setMyMacros([
+                {
+                    name: 'Calories',
+                    amount: props.macros.calories,
+                    color: '#3e98c7',
+                },
+                {
+                    name: 'Carbs',
+                    amount: props.macros.carbs,
+                    color: '#329C13',
+                },
+                {
+                    name: 'Proteins',
+                    amount: props.macros.proteins,
+                    color: '#9633E8',
+                },
+                {
+                    name: 'Fats',
+                    amount: props.macros.fats,
+                    color: '#E81005',
+                },
+            ]);
         }
 
         // * check if the user's menu wasn't fetched already
         if (!props.menu.createdAt) {
             getUserMenu();
+        } else {
+            // *  update the currentAmount state for the macros
+            setCurrentMacros([
+                props.menu.totalCalories,
+                props.menu.totalCarbs,
+                props.menu.totalProtein,
+                props.menu.totalFat,
+            ]);
         }
-    }, []);
+    }, [props, props.menu]);
 
+    const progressBarSection = (
+        <NewMenuChartsContainer>
+            {myMacros.map((macro, index) => (
+                <RoundProgressBar
+                    key={index}
+                    macro={macro}
+                    currentValue={currentMacros[index]}
+                />
+            ))}
+        </NewMenuChartsContainer>
+    );
 
     return (
         <NewMenuWrapper>
-            <NewMenuTitle>My New Menu</NewMenuTitle>
-            <MealTimeItems time='Breakfast' items={props.menu.breakfast} />
-            <MealTimeItems time='Lunch' items={props.menu.lunch} />
-            <MealTimeItems time='Dinner' items={props.menu.dinner} />
-            <MealTimeItems time='Snacks' items={props.menu.snacks} />
+            <NewMenuTitle>My Menu</NewMenuTitle>
+            {/* Progress Bar component */}
+            {progressBarSection}
+
+            {/* remove the menu display if an item is clicked*/}
+            {!props.selectedItem && (
+                <div>
+                    <MealTimeItems
+                        time='Breakfast'
+                        items={props.menu.breakfast}
+                    />
+                    <MealTimeItems time='Lunch' items={props.menu.lunch} />
+                    <MealTimeItems time='Dinner' items={props.menu.dinner} />
+                    <MealTimeItems time='Snacks' items={props.menu.snacks} />
+                </div>
+            )}
         </NewMenuWrapper>
     );
 };
@@ -114,12 +204,14 @@ NewMenu.propTypes = {
     menu: PropTypes.object.isRequired,
     onUpdateMacros: PropTypes.func.isRequired,
     onUpdateMenu: PropTypes.func.isRequired,
+    selectedItem: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {
     return {
         macros: state.profile.macros,
         menu: state.profile.menu,
+        selectedItem: state.ui.menuItem,
     };
 };
 

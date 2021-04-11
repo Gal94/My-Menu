@@ -11,13 +11,13 @@ export const fetchItems = async (query) => {
         );
 
         if (response.status >= 400) {
-            return undefined;
+            return { items: [] };
         }
 
         const data = await response.json();
         return data;
     } catch (error) {
-        return undefined;
+        return { items: [] };
     }
 };
 
