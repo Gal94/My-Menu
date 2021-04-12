@@ -8,6 +8,7 @@ import {
     SideMenuLink,
 } from './SideMenuItems.styles';
 
+// ? Maybe add favorite recipes
 const SideMenuItems = (props) => {
     return (
         <SideMenuItemsContainer>

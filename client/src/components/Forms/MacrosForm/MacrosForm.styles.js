@@ -26,7 +26,12 @@ export const MacrosPageInput = Styled.input`
     text-align: center;
     height: 32px;
     border-radius: 4px;
-    border: 1px solid black;
+    border: 1px solid #004034;
+    
+    &:focus-within {
+        outline: none;
+        box-shadow: 1px 1px 3px #00403455, -1px -1px 3px #00403455;
+    }
 `;
 
 export const MacrosPageLabel = Styled.label`
@@ -36,6 +41,7 @@ export const MacrosPageLabel = Styled.label`
     text-align: center;
     display: flex;
     justify-content: center;
+    color: #004034;
 `;
 
 export const MacroFormSubmitButton = Styled.button`
@@ -43,8 +49,8 @@ export const MacroFormSubmitButton = Styled.button`
     margin: 0 auto;
     padding: 8px 64px;
     border-radius: 20px;
-    border: 1px solid #36BF4A;
-    background-color: #36BF4A;
+    border: 1px solid #00A687;
+    background-color: #00A687;
     color: #FFFFFF;
     font-size: 12px;
     font-weight: bold;
@@ -57,5 +63,15 @@ export const MacroFormSubmitButton = Styled.button`
 
     &:active {
         transform: scale(0.95);
+    }
+
+    @media screen and (min-width: 1024px) {
+
+        transition: background-color 80ms ease-in, border-color 80ms ease-in;
+
+        &:hover {
+            background-color: #00E6BB;
+            border-color: #00E6BB;
+        }
     }
 `;

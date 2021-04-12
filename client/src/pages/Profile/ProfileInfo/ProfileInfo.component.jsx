@@ -7,7 +7,6 @@ import Spinner from '../../../components/Spinner/Spinner.component';
 import {
     ProfileInfoWrapper,
     ProfileInfoFormContainer,
-    ProfileInfoMenusContainer,
     ProfileInfoTitle,
     ProfileInfoDescContainer,
     ProfileInfoDescText,
@@ -18,9 +17,8 @@ import ProfileInfoForm from '../../../components/Forms/ProfileInfoForm/ProfileIn
 
 const ProfileInfo = (props) => {
     const [showDesc, setShowDesc] = useState(false);
-    console.log(props.userInfo);
     const getUser = async () => {
-        // use cached data on redux if fetched before
+        // * use cached data on redux if fetched before
         if (props.userInfo) {
             return;
         }
@@ -75,9 +73,6 @@ const ProfileInfo = (props) => {
                 <ProfileInfoFormContainer>
                     <ProfileInfoForm user={props.userInfo} />
                 </ProfileInfoFormContainer>
-                <ProfileInfoMenusContainer>
-                    menus container component (todo)
-                </ProfileInfoMenusContainer>
             </ProfileInfoWrapper>
         );
     }

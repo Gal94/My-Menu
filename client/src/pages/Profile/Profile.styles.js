@@ -19,7 +19,7 @@ const toggleMenu = (props) => {
 
 export const SideMenuWrapper = Styled.div`
     @media screen and (min-width: 1024px) {
-        width: 20rem;
+        width: 15rem;
     }
 `;
 
@@ -36,7 +36,7 @@ export const SideMenu = Styled.div`
     z-index: 10;
 
     @media (min-width: 1024px) {
-        width: 20rem;
+        width: 15rem;
         transform: translateX(0);
     }
     ${toggleMenu}
@@ -49,6 +49,7 @@ export const ProfilePageContentWrapper = Styled.div`
     // text-align: center;
 
     @media (min-width: 1024px) {
-        width: initial;
+        width: calc(100% - 20rem);
+        position: relative;
     }
 `;

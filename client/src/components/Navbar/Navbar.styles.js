@@ -34,6 +34,10 @@ export const NavbarItems = Styled.ul`
     width: 100%;
     padding: 0;
     margin-right: 0rem;
+
+    @media screen and (min-width: 1024px) {
+        margin-right: 2rem;
+    }
 `;
 
 export const NavbarItem = Styled.li`
@@ -48,6 +52,15 @@ export const NavbarItem = Styled.li`
 
     @media screen and (min-width: 600px) {
         font-size: 16px;
+    }
+
+    @media screen and (min-width: 1024px) {
+        font-size: 18px;
+        margin-left: 2rem;
+        
+        &:hover {
+            color: #00E6BB;
+        }
     }
 
 `;

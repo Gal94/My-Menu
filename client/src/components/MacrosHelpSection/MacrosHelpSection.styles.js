@@ -7,7 +7,7 @@ export const MacrosHelpWrapper = Styled.div`
 const isActiveBtn = (props) => {
     if (props.isActive) {
         return css`
-            background-color: #c6c6c6;
+            background-color: #00a687b0;
         `;
     }
 };
@@ -19,22 +19,25 @@ export const MacrosHelpTitle = Styled.button`
     text-align: left;
     outline: none;
     border: none;
-    background-color: #d0d0d0;
+    background-color: #00A68745;
     width: 100%;
     position: relative;
     transition: 0.4s;
-    color: #666666;
+    color: #004034;
     ${isActiveBtn}
 
-    &:hover {
-        background-color: #c6c6c6;
+    @media screen and (min-width: 1024px) {
+        &:hover {
+            background-color: #00a687b0;
+            cursor: pointer;
+        }
     }
 `;
 
 export const PlusIcon = Styled.span`
     position: absolute;
     right: 15px;
-    color: #999999;
+    color: #004034;
     font-weight: bold;
     font-size: 16px;
 `;
@@ -53,9 +56,9 @@ export const MacrosHelpInfoDiv = Styled.div`
     background-color: white;
     max-height: 0;
     ${isActiveDiv}
-    background-color: #dfdfdf;
+    background-color: #00A68788;
     overflow: hidden;
     transition: all 1s ease-out;
-    color: #666666;
+    color: #004034;
     font-size: 16px;
 `;
