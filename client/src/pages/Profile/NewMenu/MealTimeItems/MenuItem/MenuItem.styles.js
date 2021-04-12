@@ -6,6 +6,10 @@ export const LineBreak = Styled.hr`
     height: 1px;
     border: none;
     border-radius: .3rem;
+
+    @media screen and (min-width: 1024px) {
+        margin: 1rem 0;
+    }
 `;
 
 const isVisible = (props) => {
@@ -30,9 +34,16 @@ export const MenuItemCompWrapper = Styled.div`
     min-height: 100vh;
     border-radius: .3rem;
     transform: translateY(-110%);
+    font-family: 'B612', sans-serif;
     ${isVisible}
 
     transition: transform .6s, visibility 1s;
+
+    @media screen and (min-width: 1024px) {
+        width: calc(100vw - 15rem);
+        right: -2.5rem;
+        left: initial;
+    }
 `;
 
 export const MenuItemInnerDiv = Styled.div`
@@ -55,6 +66,13 @@ export const MenuItemTitleDiv = Styled.div`
 export const MenuItemTitleName = Styled.h1`
     margin: 0;
     font-size: 16px;
+    font-family: 'B612', sans-serif;
+    color: #006653;
+
+    @media screen and (min-width: 1024px) {
+        font-size: 20px;
+    }
+    
 `;
 
 export const MenuItemTitleSize = Styled.p`
@@ -62,6 +80,11 @@ export const MenuItemTitleSize = Styled.p`
     color: #a0a0a0;
     font-size: 12px;
     font-weight: initial;
+
+    @media screen and (min-width: 1024px) {
+        font-size: 14px;
+    }
+
 `;
 
 export const MenuItemPieChart = Styled.div`
@@ -77,6 +100,10 @@ export const MenuItemFactBold = Styled.div`
     font-size: 12px;
     justify-content: space-between;
     padding: 0 12px;
+    
+    @media screen and (min-width: 1024px) {
+        font-size: 14px;
+    }
 `;
 
 export const MenuItemFact = Styled.div`
@@ -89,6 +116,10 @@ export const MenuItemFact = Styled.div`
 
 export const MenuItemText = Styled.p`
     margin: 4px;
+
+    @media screen and (min-width: 1024px) {
+        font-size: 14px;
+    }
 `;
 
 export const MenuItemHeaderSection = Styled.div`
@@ -107,4 +138,15 @@ export const RemoveItemButton = Styled.button`
     outline: none;
     cursor: pointer;
     padding: 12px 8px;
+
+    @media screen and (min-width: 1024px) {
+
+        transition: all 80ms ease-in;
+
+        &:hover {
+            background-color: #f7596f;
+            color: #f0f0f0;
+            border: 1px solid #f7596f;
+        }
+    }
 `;

@@ -61,7 +61,7 @@ const MenuItem = (props) => {
                                 {capitalize(item.name)}
                             </MenuItemTitleName>
                             <MenuItemTitleSize>
-                                {Math.round(item.serving_size_g)} g
+                                {Math.round(item.serving_size_g)}g
                             </MenuItemTitleSize>
                         </MenuItemTitleDiv>
                         <RemoveItemButton onClick={removeMenuItem}>
@@ -90,52 +90,48 @@ const MenuItem = (props) => {
                         <MenuItemFactBold>
                             <MenuItemText>Total Carbohydrates</MenuItemText>
                             <MenuItemText>
-                                {item.carbohydrates_total_g} g
+                                {item.carbohydrates_total_g}g
                             </MenuItemText>
                         </MenuItemFactBold>
                         <LineBreak />
                         <MenuItemFact>
                             <MenuItemText>Fiber</MenuItemText>
-                            <MenuItemText>{item.fiber_g} g</MenuItemText>
+                            <MenuItemText>{item.fiber_g}g</MenuItemText>
                         </MenuItemFact>
                         <LineBreak />
                         <MenuItemFact>
                             <MenuItemText>Sugar</MenuItemText>
-                            <MenuItemText>{item.sugar_g} g</MenuItemText>
+                            <MenuItemText>{item.sugar_g}g</MenuItemText>
                         </MenuItemFact>
                         <LineBreak />
                         <MenuItemFactBold>
                             <MenuItemText>Total Fats</MenuItemText>
-                            <MenuItemText>{item.fat_total_g} g</MenuItemText>
+                            <MenuItemText>{item.fat_total_g}g</MenuItemText>
                         </MenuItemFactBold>
                         <LineBreak />
                         <MenuItemFact>
                             <MenuItemText>Saturated</MenuItemText>
-                            <MenuItemText>
-                                {item.fat_saturated_g} g
-                            </MenuItemText>
+                            <MenuItemText>{item.fat_saturated_g}g</MenuItemText>
                         </MenuItemFact>
                         <LineBreak />
                         <MenuItemFactBold>
                             <MenuItemText>Protein</MenuItemText>
-                            <MenuItemText>{item.protein_g} g</MenuItemText>
+                            <MenuItemText>{item.protein_g}g</MenuItemText>
                         </MenuItemFactBold>
                         <LineBreak />
                         <MenuItemFactBold>
                             <MenuItemText>Sodium</MenuItemText>
-                            <MenuItemText>{item.sodium_mg} mg</MenuItemText>
+                            <MenuItemText>{item.sodium_mg}mg</MenuItemText>
                         </MenuItemFactBold>
                         <LineBreak />
                         <MenuItemFactBold>
                             <MenuItemText>Cholesterol</MenuItemText>
-                            <MenuItemText>
-                                {item.cholesterol_mg} mg
-                            </MenuItemText>
+                            <MenuItemText>{item.cholesterol_mg}mg</MenuItemText>
                         </MenuItemFactBold>
                         <LineBreak />
                         <MenuItemFactBold>
                             <MenuItemText>Potassium</MenuItemText>
-                            <MenuItemText>{item.potassium_mg} mg</MenuItemText>
+                            <MenuItemText>{item.potassium_mg}mg</MenuItemText>
                         </MenuItemFactBold>
                     </MenuItemFactsContainer>
                 </MenuItemInnerDiv>

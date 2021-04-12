@@ -53,21 +53,21 @@ const MenuPieChart = (props) => {
                     <MenuPieChartPercentage style={{ color: '#329C13' }}>
                         {calculatePercentage(carbs)}%
                     </MenuPieChartPercentage>
-                    <MenuPieChartValue>{carbs} g</MenuPieChartValue>
+                    <MenuPieChartValue>{carbs}g</MenuPieChartValue>
                     <MenuPieChartValueType>Carbs</MenuPieChartValueType>
                 </MenuPieChartValueDiv>
                 <MenuPieChartValueDiv>
                     <MenuPieChartPercentage style={{ color: '#E81005' }}>
                         {calculatePercentage(fats)}%
                     </MenuPieChartPercentage>
-                    <MenuPieChartValue>{fats} g</MenuPieChartValue>
+                    <MenuPieChartValue>{fats}g</MenuPieChartValue>
                     <MenuPieChartValueType>Fat</MenuPieChartValueType>
                 </MenuPieChartValueDiv>
                 <MenuPieChartValueDiv>
                     <MenuPieChartPercentage style={{ color: '#9633E8' }}>
                         {calculatePercentage(proteins)}%
                     </MenuPieChartPercentage>
-                    <MenuPieChartValue>{proteins} g</MenuPieChartValue>
+                    <MenuPieChartValue>{proteins}g</MenuPieChartValue>
                     <MenuPieChartValueType>Proteins</MenuPieChartValueType>
                 </MenuPieChartValueDiv>
             </MenuPieChartTextContainer>
