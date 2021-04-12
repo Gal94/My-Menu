@@ -40,17 +40,12 @@ const Profile = (props) => {
                     <Route path='/profile/' exact>
                         <div>Profile page</div>
                     </Route>
-                    <Route path='/profile/menu/' exact>
-                        <Suspense fallback={<div></div>}>
-                            <div>Menu page component</div>
-                        </Suspense>
-                    </Route>
                     <Route path='/profile/info/' exact>
                         <Suspense fallback={<div></div>}>
                             <ProfileInfo />
                         </Suspense>
                     </Route>
-                    <Route path='/profile/new-menu' exact>
+                    <Route path='/profile/menu' exact>
                         <NewMenu />
                         <MenuItem />
                         <NewMenuItem />

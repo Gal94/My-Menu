@@ -21,7 +21,7 @@ const SideMenuItems = (props) => {
                     onClick={props.toggleCloseMenu}
                     to='/profile/menu'
                 >
-                    Menus
+                    Menu
                 </SideMenuLink>
             </SideMenuItem>
             <SideMenuItem>

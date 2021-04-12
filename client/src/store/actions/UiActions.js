@@ -4,6 +4,10 @@ export const toggleSideMenu = () => {
     return { type: actionTypes.TOGGLE_SIDE_MENU };
 };
 
+export const closeSideMenu = () => {
+    return { type: actionTypes.CLOSE_SIDE_MENU };
+};
+
 export const setMenuItem = (item) => {
     return {
         type: actionTypes.SET_CLICKED_MENU_ITEM,
@@ -26,6 +30,6 @@ export const resetMealTimeNewItem = () => {
 
 export const toggleItemForm = () => {
     return {
-        type: actionTypes.TOGGLE_NEW_ITEM_FORM
-    }
-}
+        type: actionTypes.TOGGLE_NEW_ITEM_FORM,
+    };
+};

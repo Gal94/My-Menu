@@ -8,7 +8,7 @@ import {
     NavbarLink,
 } from './Navbar.styles';
 import { LOGOUT } from '../../store/actionTypes';
-import { toggleSideMenu } from '../../store/actions/UiActions';
+import { closeSideMenu, toggleSideMenu } from '../../store/actions/UiActions';
 
 const Navbar = (props) => {
     const history = useHistory();
@@ -18,6 +18,8 @@ const Navbar = (props) => {
         props.onLogout();
         history.push('/');
     };
+
+    // * Add a new action to close side menu whenever a link is clicked
 
     return (
         <NavbarContainer>
@@ -33,18 +35,21 @@ const Navbar = (props) => {
                         display: 'flex',
                     }}
                 >
-                    <NavbarItem style={{ paddingLeft: '.5rem' }}>
+                    <NavbarItem
+                        style={{ paddingLeft: '.5rem' }}
+                        onClick={props.closeMenu}
+                    >
                         <NavbarLink to='/'>Home</NavbarLink>
                     </NavbarItem>
                     {props.token && (
                         <Fragment>
                             <NavbarItem>
-                                <NavbarLink to='/profile/new-menu'>
-                                    New Menu
+                                <NavbarLink
+                                    to='/profile'
+                                    onClick={props.closeMenu}
+                                >
+                                    Profile
                                 </NavbarLink>
-                            </NavbarItem>
-                            <NavbarItem>
-                                <NavbarLink to='/profile'>Profile</NavbarLink>
                             </NavbarItem>
                             <NavbarItem onClick={logout}>Logout</NavbarItem>
                         </Fragment>
@@ -68,8 +73,12 @@ const Navbar = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogout: () => dispatch({ type: LOGOUT }),
+        onLogout: () => {
+            dispatch(closeSideMenu());
+            dispatch({ type: LOGOUT });
+        },
         toggleMenu: () => dispatch(toggleSideMenu()),
+        closeMenu: () => dispatch(closeSideMenu()),
     };
 };
 

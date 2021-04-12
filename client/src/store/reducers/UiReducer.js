@@ -14,7 +14,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 showSideMenu: !state.showSideMenu,
             };
-
+        case actionTypes.CLOSE_SIDE_MENU:
+            return {
+                ...state,
+                showSideMenu: false,
+            };
         case actionTypes.SET_CLICKED_MENU_ITEM:
             return {
                 ...state,
