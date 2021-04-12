@@ -45,10 +45,10 @@ const Navbar = (props) => {
                         <Fragment>
                             <NavbarItem>
                                 <NavbarLink
-                                    to='/profile'
+                                    to='/menu'
                                     onClick={props.closeMenu}
                                 >
-                                    Profile
+                                    Menu
                                 </NavbarLink>
                             </NavbarItem>
                             <NavbarItem onClick={logout}>Logout</NavbarItem>

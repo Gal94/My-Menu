@@ -12,11 +12,11 @@ import {
 const SideMenuItems = (props) => {
     return (
         <SideMenuItemsContainer>
-            <SideMenuItem>
+            {/* <SideMenuItem>
                 <SideMenuLink onClick={props.toggleCloseMenu} to='/profile'>
                     View Profile
                 </SideMenuLink>
-            </SideMenuItem>
+            </SideMenuItem> */}
             <SideMenuItem>
                 <SideMenuLink
                     onClick={props.toggleCloseMenu}
