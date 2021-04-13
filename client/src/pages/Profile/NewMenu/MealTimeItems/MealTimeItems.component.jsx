@@ -36,7 +36,7 @@ const MealTimeItems = (props) => {
                 </MealTimeTitle>
             </MealTimeItemsWrapper>
             <MenuItemsContainer>
-                <MenuTimeItem>
+                <MenuTimeItem noHover={true}>
                     <MenuItemCategory isCategory={true}>Name</MenuItemCategory>
                     <MenuItemCategory isCategory={true}>
                         Amount
@@ -54,7 +54,7 @@ const MealTimeItems = (props) => {
                         >
                             <MenuItemCategory>{item.name}</MenuItemCategory>
                             <MenuItemCategory>
-                                {Math.round(item.serving_size_g)} g
+                                {Math.round(item.serving_size_g)}g
                             </MenuItemCategory>
                             <MenuItemCategory>
                                 {item.calories} Kcal

@@ -45,7 +45,7 @@ const Navbar = (props) => {
                         <Fragment>
                             <NavbarItem>
                                 <NavbarLink
-                                    to='/menu'
+                                    to='/profile/menu'
                                     onClick={props.closeMenu}
                                 >
                                     Menu

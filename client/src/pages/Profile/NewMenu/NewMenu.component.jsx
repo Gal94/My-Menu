@@ -9,6 +9,7 @@ import {
 } from '../../../store/actions/profileActions';
 import {
     NewMenuChartsContainer,
+    NewMenuContentWrapper,
     NewMenuTitle,
     NewMenuWrapper,
 } from './NewMenu.styles';
@@ -180,21 +181,29 @@ const NewMenu = (props) => {
     return (
         <NewMenuWrapper>
             <NewMenuTitle>My Menu</NewMenuTitle>
-            {/* Progress Bar component */}
-            {progressBarSection}
+            <NewMenuContentWrapper>
+                {/* Progress Bar component */}
+                {progressBarSection}
 
-            {/* remove the menu display if an item is clicked*/}
-            {!props.selectedItem && (
-                <div>
-                    <MealTimeItems
-                        time='Breakfast'
-                        items={props.menu.breakfast}
-                    />
-                    <MealTimeItems time='Lunch' items={props.menu.lunch} />
-                    <MealTimeItems time='Dinner' items={props.menu.dinner} />
-                    <MealTimeItems time='Snacks' items={props.menu.snacks} />
-                </div>
-            )}
+                {/* remove the menu display if an item is clicked*/}
+                {!props.selectedItem && (
+                    <div>
+                        <MealTimeItems
+                            time='Breakfast'
+                            items={props.menu.breakfast}
+                        />
+                        <MealTimeItems time='Lunch' items={props.menu.lunch} />
+                        <MealTimeItems
+                            time='Dinner'
+                            items={props.menu.dinner}
+                        />
+                        <MealTimeItems
+                            time='Snacks'
+                            items={props.menu.snacks}
+                        />
+                    </div>
+                )}
+            </NewMenuContentWrapper>
         </NewMenuWrapper>
     );
 };
