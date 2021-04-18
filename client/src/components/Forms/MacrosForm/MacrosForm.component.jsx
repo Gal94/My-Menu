@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-// import 'rc-tooltip/assets/bootstrap.css';
 import { updateUserMacros } from '../../../store/actions/profileActions';
 import {
     MacrosPageStyledForm,
@@ -14,8 +13,7 @@ import {
     MacroFormSubmitButton,
 } from './MacrosForm.styles';
 import MacroPieChart from './MacroPieChart/MacroPieChart.component';
-
-// TODO: Make this component pc responsive
+import { getMacros, saveMacrosForm } from '../../../helpers/ApiCalls';
 
 const MacrosForm = (props) => {
     const [state, setState] = useState({
@@ -25,84 +23,35 @@ const MacrosForm = (props) => {
         carbs: 0,
     });
 
-    // check if a user entered a number only
+    // * check if user entered a positive number only
     const onInputChange = (event) => {
-        if (Number.isInteger(+event.target.value)) {
+        if (Number.isInteger(+event.target.value) && event.target.value >= 0) {
             const newState = { ...state };
             newState[event.target.name] = +event.target.value;
             setState(newState);
         }
     };
 
-    //once form is submitted
-    const onSubmitForm = async (event) => {
+    // * Validates input and submits to back end
+    const onSubmitForm = (event) => {
         event.preventDefault();
-        // logic to check values
-
-        try {
-            const response = await fetch(
-                'http://localhost:5000/api/profile/macros',
-                {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization:
-                            'Bearer ' + localStorage.getItem('MyMenuToken'),
-                    },
-                    body: JSON.stringify(state),
-                }
-            );
-
-            const data = await response.json();
-
-            if (response.status >= 400) {
-                console.log(data);
-                toast.error(data.message);
+        // TODO: logic to check values
+        for (let macroName in state) {
+            if (
+                !Number.isInteger(+state[macroName]) ||
+                !(state[macroName] >= 0)
+            ) {
+                return toast.error(`${macroName} must contain a valid value.`);
             }
-
-            // update the profile reducer with the new goals
-            props.onUpdateMacros(data.goal);
-        } catch (err) {
-            toast.error('Failed to save changed');
         }
-    };
 
-    // Fetch user macros from database
-    const getUserMacros = async () => {
-        try {
-            const response = await fetch(
-                'http://localhost:5000/api/profile/macros',
-                {
-                    method: 'GET',
-                    headers: {
-                        Authorization:
-                            'Bearer ' + localStorage.getItem('MyMenuToken'),
-                    },
-                }
-            );
-
-            const data = await response.json();
-
-            if (response.status >= 400) {
-                console.log(data);
-                toast.error(data.message);
-            }
-            setState({
-                calories: data.goal.calories,
-                fats: data.goal.fats,
-                proteins: data.goal.proteins,
-                carbs: data.goal.carbs,
-            });
-            props.onUpdateMacros(data.goal);
-        } catch (err) {
-            toast.error('Failed to fetch values');
-        }
+        saveMacrosForm(state, props.onUpdateMacros);
     };
 
     useEffect(() => {
-        // check if the macros object is empty (never fetched macros)
+        // * check if the macros object is empty
         if (Object.keys(props.macros).length === 0) {
-            getUserMacros();
+            getMacros(props.onUpdateMacros, setState);
         } else {
             setState({
                 calories: props.macros.calories,
@@ -111,7 +60,7 @@ const MacrosForm = (props) => {
                 carbs: props.macros.carbs,
             });
         }
-    }, []);
+    }, [props.macros, props.onUpdateMacros]);
 
     return (
         <MacrosPageFormDiv>

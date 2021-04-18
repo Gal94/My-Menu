@@ -10,6 +10,7 @@ import {
     ProfileInfoStyledForm,
 } from './ProfileInfoForm.styles';
 import { updateUserInfo } from '../../../store/actions/profileActions';
+import { saveProfileInfo } from '../../../helpers/ApiCalls';
 
 const ProfileInfoForm = (props) => {
     const [userInfoToEdit, setUserInfoToEdit] = useState({
@@ -48,30 +49,13 @@ const ProfileInfoForm = (props) => {
         return true;
     };
 
-    // Submit form to api
+    // * Checks form validity and submits to api
     const onFormSubmit = async (event) => {
         event.preventDefault();
         if (!validateForm()) {
             return;
         }
-
-        const response = await fetch('http://localhost:5000/api/profile/info', {
-            method: 'put',
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('MyMenuToken'),
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userInfoToEdit),
-        });
-
-        // Display error if api failed to update info
-        if (response.status >= 400) {
-            console.log('response');
-            return toast.error('Failed to update info, please try again');
-        }
-
-        const { user } = await response.json();
-        props.updateUser(user);
+        saveProfileInfo(userInfoToEdit, props.updateUser);
     };
     return (
         <ProfileInfoStyledForm onSubmit={onFormSubmit}>

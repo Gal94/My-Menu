@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes';
 import { toast } from 'react-toastify';
+import { apiUrl } from '../../helpers/ApiCalls';
 
 export const login = (email, password) => {
     return async (dispatch) => {
@@ -9,7 +10,7 @@ export const login = (email, password) => {
                 password,
             };
 
-            let response = await fetch(`http://localhost:5000/api/auth/login`, {
+            let response = await fetch(`${apiUrl}/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ export const register = (email, password) => {
         try {
             let user = { email, password };
             let response = await fetch(
-                'http://localhost:5000/api/auth/register',
+                `${apiUrl}/auth/register`,
                 {
                     method: 'POST',
                     headers: {

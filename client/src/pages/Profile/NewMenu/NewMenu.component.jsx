@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -15,6 +14,7 @@ import {
 } from './NewMenu.styles';
 import MealTimeItems from './MealTimeItems/MealTimeItems.component';
 import { RoundProgressBar } from './RoundProgressBar/RoundProgressBar.component';
+import { getMacros, getMenuFromApi } from '../../../helpers/ApiCalls';
 
 // ? The menu display container
 const NewMenu = (props) => {
@@ -43,83 +43,31 @@ const NewMenu = (props) => {
     const [currentMacros, setCurrentMacros] = useState([0, 0, 0, 0]);
 
     const getUserMacros = async () => {
-        try {
-            const response = await fetch(
-                'http://localhost:5000/api/profile/macros',
-                {
-                    method: 'GET',
-                    headers: {
-                        Authorization:
-                            'Bearer ' + localStorage.getItem('MyMenuToken'),
-                    },
-                }
-            );
+        const goals = await getMacros(props.onUpdateMacros);
 
-            const data = await response.json();
-
-            if (response.status >= 400) {
-                return toast.error(data.message);
-            }
+        if (goals) {
             setMyMacros([
                 {
                     name: 'Calories',
-                    amount: data.goal.calories,
+                    amount: goals.calories,
                     color: '#3e98c7',
                 },
                 {
                     name: 'Carbs',
-                    amount: data.goal.carbs,
+                    amount: goals.carbs,
                     color: '#329C13',
                 },
                 {
                     name: 'Proteins',
-                    amount: data.goal.proteins,
+                    amount: goals.proteins,
                     color: '#9633E8',
                 },
                 {
                     name: 'Fats',
-                    amount: data.goal.fats,
+                    amount: goals.fats,
                     color: '#E81005',
                 },
             ]);
-            props.onUpdateMacros(data.goal);
-        } catch (err) {
-            console.log(err);
-            toast.error('Failed to fetch values');
-        }
-    };
-
-    const getUserMenu = async () => {
-        try {
-            const response = await fetch(
-                `http://localhost:5000/api/profile/menu`,
-                {
-                    method: 'GET',
-                    headers: {
-                        Authorization:
-                            'Bearer ' + localStorage.getItem('MyMenuToken'),
-                    },
-                }
-            );
-
-            const data = await response.json();
-
-            if (response.status >= 400) {
-                console.log(data);
-                return toast.error(data.message);
-            }
-
-            const item = data.menu[0];
-            props.onUpdateMenu(item);
-            setCurrentMacros([
-                item.totalCalories,
-                item.totalCarbs,
-                item.totalProtein,
-                item.totalFat,
-            ]);
-        } catch (error) {
-            console.log(error);
-            toast.error('Failed to fetch menu, please try again later.');
         }
     };
 
@@ -154,7 +102,7 @@ const NewMenu = (props) => {
 
         // * check if the user's menu wasn't fetched already
         if (!props.menu.createdAt) {
-            getUserMenu();
+            getMenuFromApi(props.onUpdateMenu, setCurrentMacros);
         } else {
             // *  update the currentAmount state for the macros
             setCurrentMacros([
@@ -164,7 +112,7 @@ const NewMenu = (props) => {
                 props.menu.totalFat,
             ]);
         }
-    }, [props, props.menu]);
+    }, [props.menu]);
 
     const progressBarSection = (
         <NewMenuChartsContainer>
