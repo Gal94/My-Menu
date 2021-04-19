@@ -1,5 +1,6 @@
 import Styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import { ReactComponent as Hamburger } from './Hamburger_icon.svg';
 
 export const transparentCss = css`
     background-color: transparent;
@@ -71,5 +72,16 @@ export const NavbarLink = Styled(Link)`
 
     &:active {
         color: #c0c0c0;
+    }
+`;
+
+export const HamburgerIcon = Styled(Hamburger)`
+
+    height: 50px;
+    width: auto;
+    filter: invert(79%) sepia(16%) saturate(1182%) hue-rotate(63deg) brightness(95%) contrast(90%);
+
+    @media screen and (min-width: 1024px) {
+        display: none;
     }
 `;

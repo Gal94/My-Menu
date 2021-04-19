@@ -1,7 +1,8 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
+    HamburgerIcon,
     NavbarContainer,
     NavbarItem,
     NavbarItems,
@@ -13,9 +14,12 @@ import { closeSideMenu, toggleSideMenu } from '../../store/actions/UiActions';
 const Navbar = (props) => {
     const history = useHistory();
 
+    const [url, setUrl] = useState('/');
+
     const logout = () => {
         localStorage.clear();
         props.onLogout();
+        setUrl('/');
         history.push('/');
     };
 
@@ -28,7 +32,7 @@ const Navbar = (props) => {
                     style={{ paddingLeft: '.5rem' }}
                     onClick={props.toggleMenu}
                 >
-                    Hamb Icon
+                    {url.includes('/profile') && <HamburgerIcon />}
                 </NavbarItem>
                 <div
                     style={{
@@ -37,7 +41,10 @@ const Navbar = (props) => {
                 >
                     <NavbarItem
                         style={{ paddingLeft: '.5rem' }}
-                        onClick={props.closeMenu}
+                        onClick={() => {
+                            setUrl('/');
+                            return props.closeMenu;
+                        }}
                     >
                         <NavbarLink to='/'>Home</NavbarLink>
                     </NavbarItem>
@@ -46,7 +53,10 @@ const Navbar = (props) => {
                             <NavbarItem>
                                 <NavbarLink
                                     to='/profile/menu'
-                                    onClick={props.closeMenu}
+                                    onClick={() => {
+                                        setUrl('/profile/menu');
+                                        return props.closeMenu;
+                                    }}
                                 >
                                     Menu
                                 </NavbarLink>
