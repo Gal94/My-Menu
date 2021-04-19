@@ -1,4 +1,5 @@
 import {
+    EasyIcon,
     FeaturesContainer,
     FeaturesDesc,
     FeaturesDescContainer,
@@ -9,6 +10,7 @@ import {
     IconContainer,
     RelaxIcon,
     SingleFeatureContainer,
+    VarietyIcon,
 } from './Features.styles';
 
 const Features = () => {
@@ -34,7 +36,7 @@ const Features = () => {
                     </SingleFeatureContainer>
                     <SingleFeatureContainer>
                         <IconContainer>
-                            <RelaxIcon />
+                            <VarietyIcon />
                         </IconContainer>
                         <FeatureTitle>Super flexible</FeatureTitle>
                         <FeatureText>
@@ -44,7 +46,7 @@ const Features = () => {
                     </SingleFeatureContainer>
                     <SingleFeatureContainer>
                         <IconContainer>
-                            <RelaxIcon />
+                            <EasyIcon />
                         </IconContainer>
                         <FeatureTitle>Easy to use</FeatureTitle>
                         <FeatureText>

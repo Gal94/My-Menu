@@ -14,6 +14,4 @@ const Home = () => {
     );
 };
 
-// GET STARTED - REGISTER/SIGN IN
-
 export default Home;

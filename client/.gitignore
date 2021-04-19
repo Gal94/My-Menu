@@ -7,7 +7,7 @@
 
 # Api key
 apiKey.js
-
+.env
 # testing
 /coverage
 

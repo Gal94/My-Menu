@@ -1,11 +1,8 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-
 import User from '../models/User.schema.js';
 import Menu from '../models/Menu.schema.js';
 import HttpError from '../util/httpError.js';
-
-// TODO : express validator on input fields
 
 export const postRegister = async (req, res, next) => {
     const { email, password } = req.body;

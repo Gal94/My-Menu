@@ -117,7 +117,6 @@ export const getMacros = async (req, res, next) => {
     return res.status(201).json({ goal: goalToReturn });
 };
 
-// TODO: express validation
 // * Updates the macro values for a user - returns updated macros
 export const putMacros = async (req, res, next) => {
     if (!req.isAuth) {
@@ -181,7 +180,6 @@ export const getMenu = async (req, res, next) => {
     }
 };
 
-// TODO: express validator
 // * Updates the menu for each new/removed entry - returns the new menu
 export const putMenu = async (req, res, next) => {
     if (!req.isAuth) {

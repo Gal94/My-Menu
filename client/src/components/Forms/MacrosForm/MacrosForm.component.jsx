@@ -35,7 +35,7 @@ const MacrosForm = (props) => {
     // * Validates input and submits to back end
     const onSubmitForm = (event) => {
         event.preventDefault();
-        // TODO: logic to check values
+        // * logic to check values
         for (let macroName in state) {
             if (
                 !Number.isInteger(+state[macroName]) ||

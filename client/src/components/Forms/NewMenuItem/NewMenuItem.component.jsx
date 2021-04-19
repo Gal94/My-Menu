@@ -39,7 +39,7 @@ const NewMenuItem = (props) => {
         }
         const newMenu = addToMenu(props.menu, props.time, items[0]);
 
-        // TODO: validate that changes saved to db before updating the store
+        // * validate that changes saved to db before updating the store
         saveMenu(newMenu);
         props.onUpdateMenu(newMenu);
         dismountModal();

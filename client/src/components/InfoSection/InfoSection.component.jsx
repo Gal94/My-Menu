@@ -10,9 +10,15 @@ import {
     GetStartedText,
 } from './InfoSection.styles';
 
-//TODO Add content
 const InfoSection = () => {
     const History = useHistory();
+
+    const redirectTo = () => {
+        if (localStorage.getItem('MyMenuToken')) {
+            return '/profile';
+        }
+        return '/register';
+    };
 
     return (
         <InfoSectionContainer id='Info'>
@@ -23,7 +29,7 @@ const InfoSection = () => {
             <GetStartedContainer>
                 <GetStarted
                     onClick={() => {
-                        History.push('/auth');
+                        History.push(redirectTo());
                     }}
                 >
                     <GetStartedTitle>Let's Get Started</GetStartedTitle>

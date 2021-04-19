@@ -10,7 +10,7 @@ const Hero = () => {
                     EAT HEALTHY<span style={{ color: 'white' }}>.</span>
                 </HeroText>
                 <HeroText>
-                    EAT STRONG<span style={{ color: '#70ff57' }}>.</span>
+                    EAT CLEAN<span style={{ color: '#006653' }}>.</span>
                 </HeroText>
                 <StyledButton />
             </HeroContainer>

@@ -20,7 +20,7 @@ export const StyledButtonContainer = Styled.div`
         &:before {
             content: "";
             position: absolute;
-            background: #70ff57c0;
+            background: #2f7366;
             bottom: 0;
             left: 0;
             right: 0;

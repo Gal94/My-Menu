@@ -19,7 +19,7 @@ function App(props) {
         if (!token) {
             return;
         }
-
+        console.log(process.env);
         props.setUser(token, user);
     });
 

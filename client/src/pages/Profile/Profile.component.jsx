@@ -1,6 +1,6 @@
 import { useEffect, Suspense, lazy } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Switch, Route } from 'react-router';
+import { Switch, Route, Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -38,7 +38,7 @@ const Profile = (props) => {
             <ProfilePageContentWrapper>
                 <Switch>
                     <Route path='/profile/' exact>
-                        <div>Profile page</div>
+                        <Redirect to='/profile/menu' />
                     </Route>
                     <Route path='/profile/info/' exact>
                         <Suspense fallback={<div></div>}>

@@ -1,7 +1,6 @@
 import Styled, { css } from 'styled-components';
 import backgroundImage from './HeroImage.jpg';
 
-// FIX ON IPHONE 5/SE | IPAD SIZES
 
 export const HeroBackground = Styled.div`
     height: 100vh;
@@ -27,7 +26,7 @@ export const HeroContainer = Styled.div`
 `;
 
 const ColoredTitle = css`
-    color: #70ff57;
+    color: #006653;
 `;
 
 const getFontColor = (props) => {
@@ -42,6 +41,7 @@ export const HeroText = Styled.h1`
     margin-top: -0.5rem;
     text-shadow: -1px -1px #215218;
     font-size: 2rem;
+    text-shadow: 4px 0 #00261fcc;
     ${getFontColor}
 
     @media screen and (min-width: 1024px) {

@@ -1,4 +1,3 @@
-// TODO : Forgot password link
 
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
@@ -102,15 +101,6 @@ const AuthForm = (props) => {
                         placeholder='Password'
                         onChange={inputChangeHandler}
                     />
-                    <p
-                        style={
-                            formType === 'login'
-                                ? { opacity: 1, cursor: 'text' }
-                                : { opacity: 0, cursor: 'default' }
-                        }
-                    >
-                        Forgot your password?
-                    </p>
 
                     {formButton}
                 </Form>

@@ -1,5 +1,7 @@
 import Styled from 'styled-components';
 import { ReactComponent as Relax } from './relax.svg';
+import { ReactComponent as Variety } from './variety.svg';
+import { ReactComponent as Easy } from './easy.svg';
 
 export const FeaturesContainer = Styled.div`
     height: 100vh;
@@ -68,6 +70,18 @@ export const IconContainer = Styled.div`
 `;
 
 export const RelaxIcon = Styled(Relax)`
+    height: 50px;
+    width: auto;
+    filter: invert(79%) sepia(16%) saturate(1182%) hue-rotate(63deg) brightness(95%) contrast(90%);
+`;
+
+export const VarietyIcon = Styled(Variety)`
+    height: 50px;
+    width: auto;
+    filter: invert(79%) sepia(16%) saturate(1182%) hue-rotate(63deg) brightness(95%) contrast(90%);
+`;
+
+export const EasyIcon = Styled(Easy)`
     height: 50px;
     width: auto;
     filter: invert(79%) sepia(16%) saturate(1182%) hue-rotate(63deg) brightness(95%) contrast(90%);

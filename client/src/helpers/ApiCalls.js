@@ -1,15 +1,15 @@
-import { apiKey } from './ApiKey';
 import { toast } from 'react-toastify';
 
 export const apiUrl = 'http://localhost:5000/api';
 
 export const fetchItems = async (query) => {
+    console.log(process.env);
     try {
         const response = await fetch(
             'https://api.calorieninjas.com/v1/nutrition?query=' + query,
             {
                 method: 'GET',
-                headers: { 'X-Api-Key': apiKey },
+                headers: { 'X-Api-Key': process.env.REACT_APP_API_KEY },
             }
         );
 
@@ -131,16 +131,12 @@ export const saveProfileInfo = async (userInfoToEdit, updateUser) => {
 
 export const getMenuFromApi = async (onUpdateMenu, setCurrentMacros) => {
     try {
-        const response = await fetch(
-            `${apiUrl}/profile/menu`,
-            {
-                method: 'GET',
-                headers: {
-                    Authorization:
-                        'Bearer ' + localStorage.getItem('MyMenuToken'),
-                },
-            }
-        );
+        const response = await fetch(`${apiUrl}/profile/menu`, {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('MyMenuToken'),
+            },
+        });
 
         const data = await response.json();
 
@@ -161,4 +157,4 @@ export const getMenuFromApi = async (onUpdateMenu, setCurrentMacros) => {
         console.log(error);
         toast.error('Failed to fetch menu, please try again later.');
     }
-}
+};
